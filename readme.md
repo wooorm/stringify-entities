@@ -2,11 +2,11 @@
 
 Encode HTML character references and character entities.
 
-*   [x] — Very fast;
+*   [x] Very fast;
 
-*   [x] — Just the encoding part;
+*   [x] Just the encoding part;
 
-*   [x] — Reliable: ``"`"`` characters are escaped to ensure no scripts
+*   [x] Reliable: ``"`"`` characters are escaped to ensure no scripts
     execute in IE6-8.  Additionally, only named entities recognized by HTML4
     are encoded, meaning the infamous `&apos;` (which people think is a
     [virus](http://www.telegraph.co.uk/technology/advice/10516839/Why-do-some-apostrophes-get-replaced-with-andapos.html))
