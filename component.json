@@ -15,7 +15,7 @@
   ],
   "repository": "wooorm/stringify-entities",
   "scripts": [
-    "index.js"
+    "index.js",
     "lib/expression.js"
   ],
   "dependencies": {
