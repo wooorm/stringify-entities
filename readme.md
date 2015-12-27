@@ -1,4 +1,4 @@
-# stringify-entities [![Build Status](https://img.shields.io/travis/wooorm/stringify-entities.svg?style=flat)](https://travis-ci.org/wooorm/stringify-entities) [![Coverage Status](https://img.shields.io/codecov/c/github/wooorm/mdast.svg)](https://codecov.io/github/wooorm/mdast)
+# stringify-entities [![Build Status](https://img.shields.io/travis/wooorm/stringify-entities.svg?style=flat)](https://travis-ci.org/wooorm/stringify-entities) [![Coverage Status](https://img.shields.io/codecov/c/github/wooorm/stringify-entities.svg)](https://codecov.io/github/wooorm/stringify-entities)
 
 Encode HTML character references and character entities.
 
