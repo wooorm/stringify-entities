@@ -64,6 +64,23 @@ test('stringifyEntities(value[, options])', function (t) {
     );
 
     t.equal(
+        stringify('\'"<>&', {
+            'subset': ['&']
+        }),
+        '\'"<>&#x26;',
+        'Encode support a `subset`'
+    );
+
+    t.equal(
+        stringify('\'"<>&', {
+            'subset': ['&'],
+            'useNamedReferences': true
+        }),
+        '\'"<>&amp;',
+        'Encode support a `subset` with `useNamedReferences`'
+    );
+
+    t.equal(
         stringify('foo\uD800bar'),
         'foo&#xD800;bar',
         'Lone high surrogate (lowest)'

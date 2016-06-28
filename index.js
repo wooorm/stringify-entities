@@ -47,7 +47,7 @@ var characters = {};
  * Regular expressions.
  */
 
-var EXPRESSION_ESCAPE = new RegExp('[' + escapes.join('') + ']', 'g');
+var EXPRESSION_ESCAPE = toExpression(escapes);
 var EXPRESSION_SURROGATE_PAIR = /[\uD800-\uDBFF][\uDC00-\uDFFF]/g;
 var EXPRESSION_BMP = /[\x01-\t\x0B\f\x0E-\x1F\x7F\x81\x8D\x8F\x90\x9D\xA0-\uFFFF]/g;
 
@@ -93,12 +93,24 @@ function characterToNamedEntity(character) {
 }
 
 /**
+ * Create an expression for `characters`.
+ *
+ * @param {Array.<string>} characters - Characters.
+ * @return {RegExp} - Expression.
+ */
+function toExpression(characters) {
+    return new RegExp('[' + characters.join('') + ']', 'g');
+}
+
+/**
  * Encode special characters in `value`.
  *
  * @param {string} value - Value to encode.
  * @param {Object?} [options] - Configuration.
  * @param {boolean?} [options.escapeOnly=false]
  *   - Whether to only escape required characters.
+ * @param {Array.<string>} [options.subset=[]]
+ *   - Subset of characters to encode.
  * @param {boolean?} [options.useNamedReferences=false]
  *   - Whether to use entities where possible.
  * @return {string} - Encoded `value`.
@@ -107,15 +119,17 @@ function encode(value, options) {
     var settings = options || {};
     var escapeOnly = settings.escapeOnly;
     var named = settings.useNamedReferences;
+    var subset = settings.subset;
     var map = named ? characters : null;
+    var set = subset ? toExpression(subset) : EXPRESSION_ESCAPE;
 
-    value = value.replace(EXPRESSION_ESCAPE, function (character) {
+    value = value.replace(set, function (character) {
         return map && has.call(map, character) ?
             toNamedEntity(map[character]) :
             characterToHexadecimalReference(character);
     });
 
-    if (escapeOnly) {
+    if (subset || escapeOnly) {
         return value;
     }
 

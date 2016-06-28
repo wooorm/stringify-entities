@@ -7,7 +7,7 @@ Encode HTML character references and character entities.
 *   [x] Just the encoding part;
 
 *   [x] Reliable: ``"`"`` characters are escaped to ensure no scripts
-    execute in IE6-8.  Additionally, only named entities recognized by HTML4
+    run in IE6-8.  Additionally, only named entities recognized by HTML4
     are encoded, meaning the infamous `&apos;` (which people think is a
     [virus](http://www.telegraph.co.uk/technology/advice/10516839/Why-do-some-apostrophes-get-replaced-with-andapos.html))
     won’t show up.
@@ -65,6 +65,9 @@ Encode special characters in `value`.
     *   `escapeOnly` (`boolean?`, optional, default: `false`)
         — Whether to only escape possibly dangerous characters
         (`"`, `'`, `<`, `>` `&`, and `` ` ``);
+
+    *   `subset` (`Array.<string>`, optional)
+        — Whether to only escape the given subset of characters;
 
     *   `useNamedReferences` (`boolean?`, optional, default: `false`)
         — Whether to use entities where possible.
