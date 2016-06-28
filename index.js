@@ -12,6 +12,8 @@
 
 /* Dependencies. */
 var entities = require('character-entities-html4');
+var legacy = require('character-entities-legacy');
+var dangerous = require('./lib/dangerous.json');
 var EXPRESSION_NAMED = require('./lib/expression.js');
 
 /* Methods. */
@@ -37,44 +39,97 @@ var EXPRESSION_SURROGATE_PAIR = /[\uD800-\uDBFF][\uDC00-\uDFFF]/g;
 var EXPRESSION_BMP = /[\x01-\t\x0B\f\x0E-\x1F\x7F\x81\x8D\x8F\x90\x9D\xA0-\uFFFF]/g;
 
 /**
- * Transform `code` into a hexadecimal character reference.
+ * Get the first character in `char`.
  *
- * @param {number} code - Number to encode.
- * @return {string} - `code` encoded as hexadecimal.
+ * @param {string} char - Value.
+ * @return {string} - First character.
  */
-function characterCodeToHexadecimalReference(code) {
-  return '&#x' + code.toString(16).toUpperCase() + ';';
+function charCode(char) {
+  return char.charCodeAt(0);
 }
 
 /**
- * Transform `character` into a hexadecimal character
- * reference.
+ * Check whether `char` is an alphanumeric.
  *
- * @param {string} character - Character to encode.
- * @return {string} - `character` encoded as hexadecimal.
+ * @param {string} char - Value.
+ * @return {boolean} - Whether `char` is an
+ *   alphanumeric.
  */
-function characterToHexadecimalReference(character) {
-  return characterCodeToHexadecimalReference(character.charCodeAt(0));
+function isAlphanumeric(char) {
+  var code = charCode(char);
+
+  return (code >= 48 /* 0 */ && code <= 57 /* 9 */) ||
+    (code >= 65 /* A */ && code <= 90 /* Z */) ||
+    (code >= 97 /* a */ && code <= 122 /* z */);
+}
+
+/**
+ * Check whether `char` is a hexadecimal.
+ *
+ * @param {string} char - Value.
+ * @return {boolean} - Whether `char` is a
+ *   hexadecimal.
+ */
+function isHexadecimal(char) {
+  var code = charCode(char);
+
+  return (code >= 48 /* 0 */ && code <= 57 /* 9 */) ||
+    (code >= 65 /* A */ && code <= 70 /* F */) ||
+    (code >= 97 /* a */ && code <= 102 /* f */);
+}
+
+/**
+ * Transform `code` into a hexadecimal character reference.
+ *
+ * @param {number} code - Number to encode.
+ * @param {boolean?} [omit] - Omit optional semi-colons.
+ * @param {string?} [next] - Next character.
+ * @return {string} - `code` encoded as hexadecimal.
+ */
+function toHexadecimalReference(code, omit, next) {
+  var value = '&#x' + code.toString(16).toUpperCase();
+
+  return omit && next && !isHexadecimal(next) ? value : value + ';';
 }
 
 /**
  * Transform `code` into an entity.
  *
  * @param {string} name - Name to wrap.
+ * @param {boolean?} [attribute] - Stringify as attribute.
+ * @param {boolean?} [omit] - Omit optional semi-colons.
+ * @param {string?} [next] - Next character.
  * @return {string} - `name` encoded as hexadecimal.
  */
-function toNamedEntity(name) {
-  return '&' + name + ';';
+function toNamedEntity(name, attribute, omit, next) {
+  var value = '&' + name;
+
+  if (
+    omit &&
+    has.call(legacy, name) &&
+    dangerous.indexOf(name) === -1 &&
+    (
+      !attribute ||
+      (next && next !== '=' && !isAlphanumeric(next))
+    )
+  ) {
+    return value;
+  }
+
+  return value + ';';
 }
 
 /**
  * Transform `code` into an entity.
  *
- * @param {string} character - Character to encode.
+ * @param {string} char - Character to encode.
+ * @param {boolean?} [attribute] - Stringify as attribute.
+ * @param {boolean?} [omit] - Omit optional semi-colons.
+ * @param {string?} [next] - Next character.
  * @return {string} - `name` encoded as hexadecimal.
  */
-function characterToNamedEntity(character) {
-  return toNamedEntity(characters[character]);
+function characterToNamedEntity(char, omit) {
+  return toNamedEntity(characters[char], omit);
 }
 
 /**
@@ -98,20 +153,28 @@ function toExpression(characters) {
  *   - Subset of characters to encode.
  * @param {boolean?} [options.useNamedReferences=false]
  *   - Whether to use entities where possible.
+ * @param {boolean?} [options.omitOptionalSemicolons=false]
+ *   - Whether to omit optional semi-colons.
+ * @param {boolean?} [options.attribute=false]
+ *   - Whether to stringifying and attribute.
  * @return {string} - Encoded `value`.
  */
 function encode(value, options) {
   var settings = options || {};
   var escapeOnly = settings.escapeOnly;
   var named = settings.useNamedReferences;
+  var omit = settings.omitOptionalSemicolons;
+  var attribute = settings.attribute;
   var subset = settings.subset;
   var map = named ? characters : null;
   var set = subset ? toExpression(subset) : EXPRESSION_ESCAPE;
 
-  value = value.replace(set, function (character) {
-    return map && has.call(map, character) ?
-      toNamedEntity(map[character]) :
-      characterToHexadecimalReference(character);
+  value = value.replace(set, function (char, pos) {
+    var next = value.charAt(pos + 1);
+
+    return map && has.call(map, char) ?
+      toNamedEntity(map[char], attribute, omit, next) :
+      toHexadecimalReference(charCode(char), omit, next);
   });
 
   if (subset || escapeOnly) {
@@ -119,17 +182,25 @@ function encode(value, options) {
   }
 
   if (named) {
-    value = value.replace(EXPRESSION_NAMED, characterToNamedEntity);
+    value = value.replace(EXPRESSION_NAMED, function (char, pos) {
+      var next = value.charAt(pos + 1);
+      return characterToNamedEntity(char, attribute, omit, next);
+    });
   }
 
   return value
-    .replace(EXPRESSION_SURROGATE_PAIR, function (pair) {
-      return characterCodeToHexadecimalReference(
+    .replace(EXPRESSION_SURROGATE_PAIR, function (pair, pos, val) {
+      return toHexadecimalReference(
         ((pair.charCodeAt(0) - 0xD800) * 0x400) +
-        pair.charCodeAt(1) - 0xDC00 + 0x10000
+        pair.charCodeAt(1) - 0xDC00 + 0x10000,
+        omit,
+        val.charAt(pos + 1)
       );
     })
-    .replace(EXPRESSION_BMP, characterToHexadecimalReference);
+    .replace(EXPRESSION_BMP, function (char, pos, val) {
+      var next = val.charAt(pos + 1);
+      return toHexadecimalReference(charCode(char), omit, next);
+    });
 }
 
 /**

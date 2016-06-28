@@ -69,7 +69,22 @@ Whether to only escape the given subset of characters (`Array.<string>`).
 
 ###### `options.useNamedReferences`
 
-Whether to use entities where possible. (`boolean?`, default: `false`).
+Whether to use entities where possible (`boolean?`, default: `false`).
+
+###### `options.omitOptionalSemicolons`
+
+Whether to use omit semi-colons when possible. **This creates parse
+errors: don’t do this unless when building a minifier** (`boolean?`,
+default: `false`).
+
+Omitting semi-colons is possible for [certain][dangerous] [legacy][]
+named references, and numeric entities, in some cases.
+
+###### `options.attribute`
+
+Only needed when operating dangerously with `omitOptionalSemicolons: true`.
+Create entities which don’t fail in attributes (`boolean?`, default:
+`false`).
 
 ## License
 
@@ -92,3 +107,7 @@ Whether to use entities where possible. (`boolean?`, default: `false`).
 [author]: http://wooorm.com
 
 [npm]: https://docs.npmjs.com/cli/install
+
+[dangerous]: lib/dangerous.json
+
+[legacy]: https://github.com/wooorm/character-entities-legacy

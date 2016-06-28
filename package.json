@@ -20,14 +20,16 @@
     "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)"
   ],
   "files": [
-    "index.js",
-    "lib/expression.js"
+    "lib",
+    "index.js"
   ],
   "dependencies": {
-    "character-entities-html4": "^1.0.0"
+    "character-entities-html4": "^1.0.0",
+    "character-entities-legacy": "^1.0.0"
   },
   "devDependencies": {
     "browserify": "^13.0.0",
+    "character-entities": "^1.0.0",
     "esmangle": "^1.0.0",
     "istanbul": "^0.4.0",
     "remark-cli": "^1.0.0",
@@ -42,9 +44,10 @@
   "scripts": {
     "build-md": "remark . --quiet --frail",
     "build-expression": "node script/generate-expression.js",
+    "build-dangerous": "node script/generate-dangerous.js",
     "build-bundle": "browserify index.js --bare -s stringifyEntities > stringify-entities.js",
     "build-mangle": "esmangle stringify-entities.js > stringify-entities.min.js",
-    "build": "npm run build-md && npm run build-expression && npm run build-bundle && npm run build-mangle",
+    "build": "npm run build-expression && npm run build-dangerous && npm run build-md && npm run build-bundle && npm run build-mangle",
     "lint": "xo",
     "test-api": "node test.js",
     "test-coverage": "istanbul cover test.js",

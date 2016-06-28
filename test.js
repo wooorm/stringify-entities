@@ -75,6 +75,93 @@ test('stringifyEntities(value[, options])', function (t) {
   );
 
   t.equal(
+    stringify('&such', {
+      omitOptionalSemicolons: true
+    }),
+    '&#x26such',
+    'Omit semi-colons'
+  );
+
+  t.equal(
+    stringify('&such', {
+      useNamedReferences: true,
+      omitOptionalSemicolons: true
+    }),
+    '&ampsuch',
+    'Omit semi-colons (named)'
+  );
+
+  t.equal(
+    stringify('&bada55', {
+      omitOptionalSemicolons: true
+    }),
+    '&#x26;bada55',
+    'Should not omit semi-colons, when numeric, and the next ' +
+    'is hexadecimal'
+  );
+
+  t.equal(
+    stringify('& such', {
+      attribute: true,
+      useNamedReferences: true,
+      omitOptionalSemicolons: true
+    }),
+    '&amp such',
+    'Omit semi-colons (named in attribute)'
+  );
+
+  t.equal(
+    stringify('&such', {
+      attribute: true,
+      useNamedReferences: true,
+      omitOptionalSemicolons: true
+    }),
+    '&amp;such',
+    'Should not omit semi-colons when named in attribute and the ' +
+    'next character is alphanumeric'
+  );
+
+  t.equal(
+    stringify('&=such', {
+      attribute: true,
+      useNamedReferences: true,
+      omitOptionalSemicolons: true
+    }),
+    '&amp;=such',
+    'Should not omit semi-colons when named in attribute and the ' +
+    'next character is `=`'
+  );
+
+  t.equal(
+    stringify('¬it;', {
+      useNamedReferences: true,
+      omitOptionalSemicolons: true
+    }),
+    '&not;it;',
+    'Should not omit semi-colons when conflicting'
+  );
+
+  t.equal(
+    stringify('&amp', {
+      useNamedReferences: true,
+      omitOptionalSemicolons: true
+    }),
+    '&ampamp',
+    'Should omit semi-colons when named, not in an attribute, and ' +
+    'the next character is alphanumeric'
+  );
+
+  t.equal(
+    stringify('&=', {
+      useNamedReferences: true,
+      omitOptionalSemicolons: true
+    }),
+    '&amp=',
+    'Should omit semi-colons when named, not in an attribute, and ' +
+    'the next character is `=`'
+  );
+
+  t.equal(
     stringify('foo\uD800bar'),
     'foo&#xD800;bar',
     'Lone high surrogate (lowest)'
