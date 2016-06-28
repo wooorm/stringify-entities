@@ -13,46 +13,72 @@
     "entity",
     "entities"
   ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/wooorm/stringify-entities.git"
-  },
-  "author": "Titus Wormer <tituswormer@gmail.com>",
+  "repository": "https://github.com/wooorm/stringify-entities.git",
+  "bugs": "https://github.com/wooorm/hast-util-to-html/issues",
+  "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
+  "contributors": [
+    "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)"
+  ],
   "files": [
     "index.js",
-    "lib/expression.js",
-    "LICENSE"
+    "lib/expression.js"
   ],
   "dependencies": {
     "character-entities-html4": "^1.0.0"
   },
   "devDependencies": {
-    "browserify": "^12.0.0",
-    "eslint": "^1.0.0",
+    "browserify": "^13.0.0",
     "esmangle": "^1.0.0",
     "istanbul": "^0.4.0",
-    "jscs": "^2.0.0",
-    "jscs-jsdoc": "^1.0.0",
-    "mdast": "^2.0.0",
-    "mdast-comment-config": "^1.0.0",
-    "mdast-github": "^1.0.0",
-    "mdast-lint": "^1.0.0",
-    "mdast-slug": "^2.0.0",
-    "mdast-validate-links": "^1.1.1",
-    "mdast-yaml-config": "^1.0.0",
-    "tape": "^4.2.0"
+    "remark-cli": "^1.0.0",
+    "remark-comment-config": "^4.0.0",
+    "remark-github": "^5.0.0",
+    "remark-lint": "^4.0.0",
+    "remark-toc": "^3.0.0",
+    "remark-validate-links": "^4.0.0",
+    "tape": "^4.0.0",
+    "xo": "^0.16.0"
   },
   "scripts": {
-    "build-md": "mdast . --quiet  --frail",
+    "build-md": "remark . --quiet --frail",
     "build-expression": "node script/generate-expression.js",
     "build-bundle": "browserify index.js --bare -s stringifyEntities > stringify-entities.js",
     "build-mangle": "esmangle stringify-entities.js > stringify-entities.min.js",
     "build": "npm run build-md && npm run build-expression && npm run build-bundle && npm run build-mangle",
-    "lint-api": "eslint .",
-    "lint-style": "jscs --reporter inline .",
-    "lint": "npm run lint-api && npm run lint-style",
+    "lint": "xo",
     "test-api": "node test.js",
     "test-coverage": "istanbul cover test.js",
     "test": "npm run build && npm run lint && npm run test-coverage"
+  },
+  "xo": {
+    "space": true,
+    "rules": {
+      "guard-for-in": [
+        0
+      ],
+      "eqeqeq": [
+        0,
+        "allow-null"
+      ],
+      "no-eq-null": [
+        0
+      ]
+    },
+    "ignores": [
+      "stringify-entities.js",
+      "stringify-entities.min.js"
+    ]
+  },
+  "remarkConfig": {
+    "output": true,
+    "plugins": [
+      "comment-config",
+      "lint",
+      "github",
+      "validate-links"
+    ],
+    "settings": {
+      "bullet": "*"
+    }
   }
 }

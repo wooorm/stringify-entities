@@ -1,11 +1,11 @@
-# stringify-entities [![Build Status](https://img.shields.io/travis/wooorm/stringify-entities.svg?style=flat)](https://travis-ci.org/wooorm/stringify-entities) [![Coverage Status](https://img.shields.io/codecov/c/github/wooorm/stringify-entities.svg)](https://codecov.io/github/wooorm/stringify-entities)
+# stringify-entities [![Build Status][build-badge]][build-status] [![Coverage Status][coverage-badge]][coverage-status]
+
+<!--lint disable list-item-spacing heading-increment-->
 
 Encode HTML character references and character entities.
 
 *   [x] Very fast;
-
 *   [x] Just the encoding part;
-
 *   [x] Reliable: ``"`"`` characters are escaped to ensure no scripts
     run in IE6-8.  Additionally, only named entities recognized by HTML4
     are encoded, meaning the infamous `&apos;` (which people think is a
@@ -14,15 +14,14 @@ Encode HTML character references and character entities.
 
 ## Installation
 
-[npm](https://docs.npmjs.com/cli/install):
+[npm][]:
 
 ```bash
 npm install stringify-entities
 ```
 
-**stringify-entities** is also available for [duo](http://duojs.org/#getting-started),
-and [bundled](https://github.com/wooorm/stringify-entities/releases) for AMD,
-CommonJS, and globals (uncompressed and compressed).
+**stringify-entities** is also available as an AMD, CommonJS, and globals
+module, [uncompressed and compressed][releases].
 
 ## Usage
 
@@ -38,7 +37,7 @@ Yields:
 alpha &#xA9; bravo &#x2260; charlie &#x1D306; delta
 ```
 
-&hellip;and with `useNamedReferences: true`.
+…and with `useNamedReferences: true`.
 
 ```js
 stringify.encode('alpha © bravo ≠ charlie 𝌆 delta', { useNamedReferences: true });
@@ -52,37 +51,44 @@ alpha &copy; bravo &ne; charlie &#x1D306; delta
 
 ## API
 
-### stringifyEntities(value\[, options?])
+### `stringifyEntities(value[, options])`
 
 Encode special characters in `value`.
 
-**Parameters**:
+##### `options`
 
-*   `value` (`string`) — Value to encode;
+###### `options.escapeOnly`
 
-*   `options` (`Object?`, optional) — Configuration:
+Whether to only escape possibly dangerous characters (`boolean`,
+default: `false`).  Those characters are `"`, `'`, `<`, `>` `&`, and
+`` ` ``.
 
-    *   `escapeOnly` (`boolean?`, optional, default: `false`)
-        — Whether to only escape possibly dangerous characters
-        (`"`, `'`, `<`, `>` `&`, and `` ` ``);
+###### `options.subset`
 
-    *   `subset` (`Array.<string>`, optional)
-        — Whether to only escape the given subset of characters;
+Whether to only escape the given subset of characters (`Array.<string>`).
 
-    *   `useNamedReferences` (`boolean?`, optional, default: `false`)
-        — Whether to use entities where possible.
+###### `options.useNamedReferences`
 
-**Returns**: `string`, encoded `value`.
-
-### stringifyEntities.escape(value\[, options?])
-
-Escape special characters in `value`.  Shortcut for `stringifyEntities`
-with `escapeOnly: true` and `useNamedReferences: true`.
-
-## Support
-
-See [html.spec.whatwg.org](https://html.spec.whatwg.org/multipage/syntax.html#named-character-references).
+Whether to use entities where possible. (`boolean?`, default: `false`).
 
 ## License
 
-[MIT](LICENSE) © [Titus Wormer](http://wooorm.com)
+[MIT][license] © [Titus Wormer][author]
+
+<!-- Definitions -->
+
+[build-badge]: https://img.shields.io/travis/wooorm/stringify-entities.svg
+
+[build-status]: https://travis-ci.org/wooorm/stringify-entities
+
+[coverage-badge]: https://img.shields.io/codecov/c/github/wooorm/stringify-entities.svg
+
+[coverage-status]: https://codecov.io/github/wooorm/stringify-entities
+
+[releases]: https://github.com/wooorm/stringify-entities/releases
+
+[license]: LICENSE
+
+[author]: http://wooorm.com
+
+[npm]: https://docs.npmjs.com/cli/install

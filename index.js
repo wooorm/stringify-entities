@@ -10,43 +10,28 @@
 
 /* eslint-env commonjs */
 
-/*
- * Dependencies.
- */
-
+/* Dependencies. */
 var entities = require('character-entities-html4');
 var EXPRESSION_NAMED = require('./lib/expression.js');
 
-/*
- * Methods.
- */
-
+/* Methods. */
 var has = {}.hasOwnProperty;
 
-/*
- * List of enforced escapes.
- */
-
+/* List of enforced escapes. */
 var escapes = ['"', '\'', '<', '>', '&', '`'];
 
-/*
- * Map of characters to names.
- */
-
+/* Map of characters to names. */
 var characters = {};
 
 (function () {
-    var name;
+  var name;
 
-    for (name in entities) {
-        characters[entities[name]] = name;
-    }
+  for (name in entities) {
+    characters[entities[name]] = name;
+  }
 })();
 
-/*
- * Regular expressions.
- */
-
+/* Regular expressions. */
 var EXPRESSION_ESCAPE = toExpression(escapes);
 var EXPRESSION_SURROGATE_PAIR = /[\uD800-\uDBFF][\uDC00-\uDFFF]/g;
 var EXPRESSION_BMP = /[\x01-\t\x0B\f\x0E-\x1F\x7F\x81\x8D\x8F\x90\x9D\xA0-\uFFFF]/g;
@@ -58,7 +43,7 @@ var EXPRESSION_BMP = /[\x01-\t\x0B\f\x0E-\x1F\x7F\x81\x8D\x8F\x90\x9D\xA0-\uFFFF
  * @return {string} - `code` encoded as hexadecimal.
  */
 function characterCodeToHexadecimalReference(code) {
-    return '&#x' + code.toString(16).toUpperCase() + ';';
+  return '&#x' + code.toString(16).toUpperCase() + ';';
 }
 
 /**
@@ -69,7 +54,7 @@ function characterCodeToHexadecimalReference(code) {
  * @return {string} - `character` encoded as hexadecimal.
  */
 function characterToHexadecimalReference(character) {
-    return characterCodeToHexadecimalReference(character.charCodeAt(0));
+  return characterCodeToHexadecimalReference(character.charCodeAt(0));
 }
 
 /**
@@ -79,7 +64,7 @@ function characterToHexadecimalReference(character) {
  * @return {string} - `name` encoded as hexadecimal.
  */
 function toNamedEntity(name) {
-    return '&' + name + ';';
+  return '&' + name + ';';
 }
 
 /**
@@ -89,7 +74,7 @@ function toNamedEntity(name) {
  * @return {string} - `name` encoded as hexadecimal.
  */
 function characterToNamedEntity(character) {
-    return toNamedEntity(characters[character]);
+  return toNamedEntity(characters[character]);
 }
 
 /**
@@ -99,7 +84,7 @@ function characterToNamedEntity(character) {
  * @return {RegExp} - Expression.
  */
 function toExpression(characters) {
-    return new RegExp('[' + characters.join('') + ']', 'g');
+  return new RegExp('[' + characters.join('') + ']', 'g');
 }
 
 /**
@@ -116,35 +101,35 @@ function toExpression(characters) {
  * @return {string} - Encoded `value`.
  */
 function encode(value, options) {
-    var settings = options || {};
-    var escapeOnly = settings.escapeOnly;
-    var named = settings.useNamedReferences;
-    var subset = settings.subset;
-    var map = named ? characters : null;
-    var set = subset ? toExpression(subset) : EXPRESSION_ESCAPE;
+  var settings = options || {};
+  var escapeOnly = settings.escapeOnly;
+  var named = settings.useNamedReferences;
+  var subset = settings.subset;
+  var map = named ? characters : null;
+  var set = subset ? toExpression(subset) : EXPRESSION_ESCAPE;
 
-    value = value.replace(set, function (character) {
-        return map && has.call(map, character) ?
-            toNamedEntity(map[character]) :
-            characterToHexadecimalReference(character);
-    });
+  value = value.replace(set, function (character) {
+    return map && has.call(map, character) ?
+      toNamedEntity(map[character]) :
+      characterToHexadecimalReference(character);
+  });
 
-    if (subset || escapeOnly) {
-        return value;
-    }
+  if (subset || escapeOnly) {
+    return value;
+  }
 
-    if (named) {
-        value = value.replace(EXPRESSION_NAMED, characterToNamedEntity);
-    }
+  if (named) {
+    value = value.replace(EXPRESSION_NAMED, characterToNamedEntity);
+  }
 
-    return value
-        .replace(EXPRESSION_SURROGATE_PAIR, function (pair) {
-            return characterCodeToHexadecimalReference(
-                (pair.charCodeAt(0) - 0xD800) * 0x400 +
-                pair.charCodeAt(1) - 0xDC00 + 0x10000
-            );
-        })
-        .replace(EXPRESSION_BMP, characterToHexadecimalReference);
+  return value
+    .replace(EXPRESSION_SURROGATE_PAIR, function (pair) {
+      return characterCodeToHexadecimalReference(
+        ((pair.charCodeAt(0) - 0xD800) * 0x400) +
+        pair.charCodeAt(1) - 0xDC00 + 0x10000
+      );
+    })
+    .replace(EXPRESSION_BMP, characterToHexadecimalReference);
 }
 
 /**
@@ -154,16 +139,13 @@ function encode(value, options) {
  * @return {string} - Encoded `value`.
  */
 function escape(value) {
-    return encode(value, {
-        'escapeOnly': true,
-        'useNamedReferences': true
-    });
+  return encode(value, {
+    escapeOnly: true,
+    useNamedReferences: true
+  });
 }
 
 encode.escape = escape;
 
-/*
- * Expose.
- */
-
+/* Expose. */
 module.exports = encode;
