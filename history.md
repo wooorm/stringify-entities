@@ -2,6 +2,12 @@
 
 <!--lint disable no-multiple-toplevel-headings-->
 
+1.1.0 / 2016-06-28
+==================
+
+*   Add support for generating semi-colonless references ([`c5e1c4f`](https://github.com/wooorm/stringify-entities/commit/c5e1c4f))
+*   Add support for passing a `subset` of characters ([`ad98ff3`](https://github.com/wooorm/stringify-entities/commit/ad98ff3))
+
 1.0.1 / 2015-12-27
 ==================
 
