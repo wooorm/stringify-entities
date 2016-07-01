@@ -43,11 +43,10 @@
   },
   "scripts": {
     "build-md": "remark . --quiet --frail",
-    "build-expression": "node script/generate-expression.js",
     "build-dangerous": "node script/generate-dangerous.js",
     "build-bundle": "browserify index.js --bare -s stringifyEntities > stringify-entities.js",
     "build-mangle": "esmangle stringify-entities.js > stringify-entities.min.js",
-    "build": "npm run build-expression && npm run build-dangerous && npm run build-md && npm run build-bundle && npm run build-mangle",
+    "build": "npm run build-dangerous && npm run build-md && npm run build-bundle && npm run build-mangle",
     "lint": "xo",
     "test-api": "node test.js",
     "test-coverage": "istanbul cover test.js",

@@ -22,7 +22,7 @@ var entities = Object.keys(require('character-entities'));
 /* Escape-codes. */
 var conflict = [];
 
-/* Generate the expression. */
+/* Generate the list. */
 var length = legacy.length;
 var count = entities.length;
 var index = -1;

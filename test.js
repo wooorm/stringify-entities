@@ -15,10 +15,6 @@
 var test = require('tape');
 var stringify = require('./');
 
-var named = {
-  useNamedReferences: true
-};
-
 /* Tests. */
 test('stringifyEntities.escape(value)', function (t) {
   t.equal(
@@ -46,9 +42,19 @@ test('stringifyEntities(value[, options])', function (t) {
   );
 
   t.equal(
-    stringify('foo\xA9bar\uD834\uDF06baz\u2603qux', named),
+    stringify('foo\xA9bar\uD834\uDF06baz\u2603qux', {
+      useNamedReferences: true
+    }),
     'foo&copy;bar&#x1D306;baz&#x2603;qux',
-    'Other non-ASCII symbols are represented through hexadecimal escapes'
+    'Should use named entities if `useNamedReferences` and possible'
+  );
+
+  t.equal(
+    stringify('alpha © bravo ≠ charlie 𝌆 delta', {
+      useShortestReferences: true
+    }),
+    'alpha &#xA9; bravo &ne; charlie &#x1D306; delta',
+    'Should use shortest entities if `useShortestReferences`'
   );
 
   t.equal(
