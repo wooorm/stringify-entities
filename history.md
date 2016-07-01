@@ -2,6 +2,11 @@
 
 <!--lint disable no-multiple-toplevel-headings-->
 
+1.2.0 / 2016-07-01
+==================
+
+*   Add `useShortestReferences` option ([`a2ea7aa`](https://github.com/wooorm/stringify-entities/commit/a2ea7aa))
+
 1.1.0 / 2016-06-28
 ==================
 
