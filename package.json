@@ -20,7 +20,7 @@
     "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)"
   ],
   "files": [
-    "lib",
+    "dangerous.json",
     "index.js"
   ],
   "dependencies": {

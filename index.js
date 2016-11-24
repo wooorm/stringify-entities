@@ -5,7 +5,7 @@ var legacy = require('character-entities-legacy');
 var has = require('has');
 var hexadecimal = require('is-hexadecimal');
 var alphanumerical = require('is-alphanumerical');
-var dangerous = require('./lib/dangerous.json');
+var dangerous = require('./dangerous.json');
 
 /* Expose. */
 module.exports = encode;

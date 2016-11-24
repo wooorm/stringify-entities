@@ -27,7 +27,4 @@ while (++index < length) {
   }
 }
 
-fs.writeFileSync(
-  path.join('lib', 'dangerous.json'),
-  JSON.stringify(conflict, null, 2) + '\n'
-);
+fs.writeFileSync(path.join('dangerous.json'), JSON.stringify(conflict, null, 2) + '\n');

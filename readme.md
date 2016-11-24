@@ -126,7 +126,7 @@ Create entities which don’t fail in attributes (`boolean?`, default:
 
 [virus]: http://www.telegraph.co.uk/technology/advice/10516839/Why-do-some-apostrophes-get-replaced-with-andapos.html
 
-[dangerous]: lib/dangerous.json
+[dangerous]: dangerous.json
 
 [legacy]: https://github.com/wooorm/character-entities-legacy
 
