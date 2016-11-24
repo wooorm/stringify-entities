@@ -1,21 +1,8 @@
-/**
- * @author Titus Wormer
- * @copyright 2015 Titus Wormer
- * @license MIT
- * @module stringify-entities
- * @fileoverview Test suite for `stringify-entities`.
- */
-
 'use strict';
 
-/* eslint-env node */
-/* jscs:disable maximumLineLength */
-
-/* Dependencies. */
 var test = require('tape');
 var stringify = require('./');
 
-/* Tests. */
 test('stringifyEntities.escape(value)', function (t) {
   t.equal(
     stringify.escape(
