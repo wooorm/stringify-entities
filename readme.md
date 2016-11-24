@@ -89,7 +89,7 @@ can be omitted when using `useShortestReferences`.
 
 ###### `options.omitOptionalSemicolons`
 
-Whether to omit semi-colons when possible. (`boolean?`, default: `false`).
+Whether to omit semi-colons when possible (`boolean?`, default: `false`).
 **Note**: This creates parse errors: don’t use this except when building
 a minifier.
 

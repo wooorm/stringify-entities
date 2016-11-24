@@ -31,56 +31,44 @@
     "browserify": "^13.0.0",
     "character-entities": "^1.0.0",
     "esmangle": "^1.0.0",
-    "istanbul": "^0.4.0",
-    "remark-cli": "^1.0.0",
-    "remark-comment-config": "^4.0.0",
-    "remark-github": "^5.0.0",
-    "remark-lint": "^4.0.0",
-    "remark-toc": "^3.0.0",
-    "remark-validate-links": "^4.0.0",
+    "nyc": "^10.0.0",
+    "remark-cli": "^2.1.0",
+    "remark-preset-wooorm": "^1.0.0",
     "tape": "^4.0.0",
-    "xo": "^0.16.0"
+    "xo": "^0.17.1"
   },
   "scripts": {
-    "build-md": "remark . --quiet --frail",
+    "build-md": "remark . -qfo",
     "build-dangerous": "node script/generate-dangerous.js",
     "build-bundle": "browserify index.js --bare -s stringifyEntities > stringify-entities.js",
     "build-mangle": "esmangle stringify-entities.js > stringify-entities.min.js",
     "build": "npm run build-dangerous && npm run build-md && npm run build-bundle && npm run build-mangle",
     "lint": "xo",
-    "test-api": "node test.js",
-    "test-coverage": "istanbul cover test.js",
+    "test-api": "node test",
+    "test-coverage": "nyc --reporter lcov tape test.js",
     "test": "npm run build && npm run lint && npm run test-coverage"
+  },
+  "nyc": {
+    "check-coverage": true,
+    "lines": 100,
+    "functions": 100,
+    "branches": 100
   },
   "xo": {
     "space": true,
     "rules": {
-      "guard-for-in": [
-        0
-      ],
+      "guard-for-in": "off",
       "eqeqeq": [
-        0,
+        "off",
         "allow-null"
       ],
-      "no-eq-null": [
-        0
-      ]
+      "no-eq-null": "off"
     },
     "ignores": [
-      "stringify-entities.js",
-      "stringify-entities.min.js"
+      "stringify-entities.js"
     ]
   },
   "remarkConfig": {
-    "output": true,
-    "plugins": [
-      "comment-config",
-      "lint",
-      "github",
-      "validate-links"
-    ],
-    "settings": {
-      "bullet": "*"
-    }
+    "presets": "wooorm"
   }
 }
