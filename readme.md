@@ -1,7 +1,5 @@
 # stringify-entities [![Build Status][build-badge]][build-status] [![Coverage Status][coverage-badge]][coverage-status]
 
-<!--lint disable list-item-spacing heading-increment-->
-
 Encode HTML character references and character entities.
 
 *   [x] Very fast;
@@ -29,33 +27,16 @@ to use them if that results in less bytes.
 npm install stringify-entities
 ```
 
-**stringify-entities** is also available as an AMD, CommonJS, and globals
-module, [uncompressed and compressed][releases].
-
 ## Usage
 
 ```js
 var stringify = require('stringify-entities');
 
 stringify('alpha © bravo ≠ charlie 𝌆 delta');
-```
+//=> 'alpha &#xA9; bravo &#x2260; charlie &#x1D306; delta'
 
-Yields:
-
-```html
-alpha &#xA9; bravo &#x2260; charlie &#x1D306; delta
-```
-
-…and with `useNamedReferences: true`.
-
-```js
-stringify('alpha © bravo ≠ charlie 𝌆 delta', { useNamedReferences: true });
-```
-
-Yields:
-
-```html
-alpha &copy; bravo &ne; charlie &#x1D306; delta
+stringify('alpha © bravo ≠ charlie 𝌆 delta', {useNamedReferences: true});
+//=> 'alpha &copy; bravo &ne; charlie &#x1D306; delta'
 ```
 
 ## API
@@ -115,8 +96,6 @@ Create entities which don’t fail in attributes (`boolean?`, default:
 [coverage-badge]: https://img.shields.io/codecov/c/github/wooorm/stringify-entities.svg
 
 [coverage-status]: https://codecov.io/github/wooorm/stringify-entities
-
-[releases]: https://github.com/wooorm/stringify-entities/releases
 
 [license]: LICENSE
 
