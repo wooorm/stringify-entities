@@ -39,7 +39,7 @@
   },
   "scripts": {
     "build-md": "remark . -qfo",
-    "build-dangerous": "node script/generate-dangerous.js",
+    "build-dangerous": "node build",
     "build-bundle": "browserify index.js --bare -s stringifyEntities > stringify-entities.js",
     "build-mangle": "esmangle stringify-entities.js > stringify-entities.min.js",
     "build": "npm run build-dangerous && npm run build-md && npm run build-bundle && npm run build-mangle",
