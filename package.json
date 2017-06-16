@@ -26,7 +26,6 @@
   "dependencies": {
     "character-entities-html4": "^1.0.0",
     "character-entities-legacy": "^1.0.0",
-    "has": "^1.0.1",
     "is-alphanumerical": "^1.0.0",
     "is-hexadecimal": "^1.0.0"
   },
