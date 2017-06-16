@@ -13,8 +13,8 @@
     "entity",
     "entities"
   ],
-  "repository": "https://github.com/wooorm/stringify-entities.git",
-  "bugs": "https://github.com/wooorm/hast-util-to-html/issues",
+  "repository": "wooorm/stringify-entities",
+  "bugs": "https://github.com/wooorm/stringify-entities/issues",
   "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
   "contributors": [
     "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)"
@@ -60,18 +60,15 @@
     "space": true,
     "esnext": false,
     "rules": {
-      "guard-for-in": "off",
-      "eqeqeq": [
-        "off",
-        "allow-null"
-      ],
-      "no-eq-null": "off"
+      "guard-for-in": "off"
     },
     "ignores": [
       "stringify-entities.js"
     ]
   },
   "remarkConfig": {
-    "plugins": ["preset-wooorm"]
+    "plugins": [
+      "preset-wooorm"
+    ]
   }
 }
