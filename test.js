@@ -6,10 +6,10 @@ var stringify = require('./');
 test('stringifyEntities.escape(value)', function (t) {
   t.equal(
     stringify.escape(
-        '<img src=\'x\' onerror="prompt(1)">' +
-        '<script>alert(1)</script>' +
-        '<img src="x` `' +
-        '<script>alert(1)</script>"` `>'
+      '<img src=\'x\' onerror="prompt(1)">' +
+      '<script>alert(1)</script>' +
+      '<img src="x` `' +
+      '<script>alert(1)</script>"` `>'
     ),
     '&lt;img src=&#x27;x&#x27; onerror=&quot;prompt(1)&quot;&gt;' +
     '&lt;script&gt;alert(1)&lt;/script&gt;' +
