@@ -8,7 +8,6 @@ var dangerous = require('./dangerous.json');
 
 /* Expose. */
 module.exports = encode;
-
 encode.escape = escape;
 
 var own = {}.hasOwnProperty;
@@ -20,20 +19,20 @@ var escapes = ['"', '\'', '<', '>', '&', '`'];
 var characters = construct();
 
 /* Default escapes. */
-var EXPRESSION_ESCAPE = toExpression(escapes);
+var defaultEscapes = toExpression(escapes);
 
 /* Surrogate pairs. */
-var EXPRESSION_SURROGATE_PAIR = /[\uD800-\uDBFF][\uDC00-\uDFFF]/g;
+var surrogatePair = /[\uD800-\uDBFF][\uDC00-\uDFFF]/g;
 
 /* Non-ASCII characters. */
 // eslint-disable-next-line no-control-regex
-var EXPRESSION_BMP = /[\x01-\t\x0B\f\x0E-\x1F\x7F\x81\x8D\x8F\x90\x9D\xA0-\uFFFF]/g;
+var bmp = /[\x01-\t\x0B\f\x0E-\x1F\x7F\x81\x8D\x8F\x90\x9D\xA0-\uFFFF]/g;
 
 /* Encode special characters in `value`. */
 function encode(value, options) {
   var settings = options || {};
   var subset = settings.subset;
-  var set = subset ? toExpression(subset) : EXPRESSION_ESCAPE;
+  var set = subset ? toExpression(subset) : defaultEscapes;
   var escapeOnly = settings.escapeOnly;
   var omit = settings.omitOptionalSemicolons;
 
@@ -46,7 +45,7 @@ function encode(value, options) {
   }
 
   return value
-    .replace(EXPRESSION_SURROGATE_PAIR, function (pair, pos, val) {
+    .replace(surrogatePair, function (pair, pos, val) {
       return toHexReference(
         ((pair.charCodeAt(0) - 0xD800) * 0x400) +
         pair.charCodeAt(1) - 0xDC00 + 0x10000,
@@ -54,7 +53,7 @@ function encode(value, options) {
         omit
       );
     })
-    .replace(EXPRESSION_BMP, function (char, pos, val) {
+    .replace(bmp, function (char, pos, val) {
       return one(char, val.charAt(pos + 1), settings);
     });
 }
