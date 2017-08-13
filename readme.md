@@ -83,6 +83,19 @@ Only needed when operating dangerously with `omitOptionalSemicolons: true`.
 Create entities which don’t fail in attributes (`boolean?`, default:
 `false`).
 
+## Related
+
+*   [`parse-entities`](https://github.com/wooorm/parse-entities)
+    — Parse HTML character references
+*   [`character-entities`](https://github.com/wooorm/character-entities)
+    — Info on character entities
+*   [`character-entities-html4`](https://github.com/wooorm/character-entities-html4)
+    — Info on HTML4 character entities
+*   [`character-entities-legacy`](https://github.com/wooorm/character-entities-legacy)
+    — Info on legacy character entities
+*   [`character-reference-invalid`](https://github.com/wooorm/character-reference-invalid)
+    — Info on invalid numeric character references
+
 ## License
 
 [MIT][license] © [Titus Wormer][author]
