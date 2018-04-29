@@ -1,10 +1,11 @@
 language: node_js
 node_js:
-- '4.0'
-- '8.0'
+- lts/boron
+- node
 after_script: bash <(curl -s https://codecov.io/bash)
 deploy:
   provider: releases
+  skip_cleanup: true
   api_key:
     secure: SD9Ea2dInm7JHHR11sHtt4EvnKQFc5D/mD3UAirg48i2EhTqAjRZyCIigwQePMfNztM+gODp4Usn2648ZESXONZ5/sQ2HQPlqNIILi/kz1YRUX6DOViRKCpFsPvJGRucJB3KqT9o0mwG5jSVDStd0DkuxUUZWCVcxxUXJ2jZs6+XFhtaOkodzDM50OpRfHT8YFaRcpU9r/yokYsDP4IU/fyj8rDxzSOdcmLb6ASNwVH9qqheuyAv1ei4oqrll9Y0sbM/5osHUmsBMM7VS+gDcLgyLc10UlhyEA1emawdw48j2L9+RaPA+quE5vbFrCYra6M2UPRUbe2YAULPjPeuTKjJaK3wSshJlhFjF+QRNEyFbN6XTyfWI/e+qryeDdMILWCL9RSAXT58fOFQCDPSlEiYFrbLN8TjQVK6unfm69EDwrTEfwH+jGh+Ye9ScUNsmX71QHiFyPCjbooY4F8gIR8Rku1NhYQ0DVc4nVhoMasJvIakAYq1lBZ0uuZBf42blbBPvbwSUqwtDynS3cO40QdQSoo6E8o5G1LgaA8x1V2vHE0OL8Z59qYisxDdIwD2YAX1y/qp7wUFStgHUtRZEVV+WKgxaJGcOhEKo/jNgVInAASPgh0yNRMxaSveKvrVPdUBeWjvhz/Z+CkOJiKOPuv6yX9dHNki9nooGkF7JuI=
   file:
@@ -12,4 +13,3 @@ deploy:
     - "stringify-entities.min.js"
   on:
     tags: true
-    node: '8.0'
