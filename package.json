@@ -40,15 +40,14 @@
     "xo": "^0.20.0"
   },
   "scripts": {
-    "build-md": "remark . -qfo",
-    "build-dangerous": "node build",
+    "generate": "node build",
+    "format": "remark . -qfo && prettier --write '**/*.js' && xo --fix",
     "build-bundle": "browserify index.js --bare -s stringifyEntities > stringify-entities.js",
     "build-mangle": "esmangle stringify-entities.js > stringify-entities.min.js",
-    "build": "npm run build-dangerous && npm run build-md && npm run build-bundle && npm run build-mangle",
-    "lint": "xo",
+    "build": "npm run build-bundle && npm run build-mangle",
     "test-api": "node test",
     "test-coverage": "nyc --reporter lcov tape test.js",
-    "test": "npm run build && npm run lint && npm run test-coverage"
+    "test": "npm run generate && npm run format && npm run build && npm run test-coverage"
   },
   "nyc": {
     "check-coverage": true,
@@ -56,11 +55,20 @@
     "functions": 100,
     "branches": 100
   },
+  "prettier": {
+    "tabWidth": 2,
+    "useTabs": false,
+    "singleQuote": true,
+    "bracketSpacing": false,
+    "semi": false,
+    "trailingComma": "none"
+  },
   "xo": {
-    "space": true,
+    "prettier": true,
     "esnext": false,
     "rules": {
       "no-var": "off",
+      "unicorn/number-literal-case": "off",
       "prefer-arrow-callback": "off",
       "guard-for-in": "off"
     },

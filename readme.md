@@ -30,13 +30,13 @@ npm install stringify-entities
 ## Usage
 
 ```js
-var stringify = require('stringify-entities');
+var stringify = require('stringify-entities')
 
-stringify('alpha © bravo ≠ charlie 𝌆 delta');
-//=> 'alpha &#xA9; bravo &#x2260; charlie &#x1D306; delta'
+stringify('alpha © bravo ≠ charlie 𝌆 delta')
+// => 'alpha &#xA9; bravo &#x2260; charlie &#x1D306; delta'
 
-stringify('alpha © bravo ≠ charlie 𝌆 delta', {useNamedReferences: true});
-//=> 'alpha &copy; bravo &ne; charlie &#x1D306; delta'
+stringify('alpha © bravo ≠ charlie 𝌆 delta', {useNamedReferences: true})
+// => 'alpha &copy; bravo &ne; charlie &#x1D306; delta'
 ```
 
 ## API
