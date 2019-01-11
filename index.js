@@ -6,29 +6,28 @@ var hexadecimal = require('is-hexadecimal')
 var alphanumerical = require('is-alphanumerical')
 var dangerous = require('./dangerous.json')
 
-/* Expose. */
 module.exports = encode
 encode.escape = escape
 
 var own = {}.hasOwnProperty
 
-/* List of enforced escapes. */
+// List of enforced escapes.
 var escapes = ['"', "'", '<', '>', '&', '`']
 
-/* Map of characters to names. */
+// Map of characters to names.
 var characters = construct()
 
-/* Default escapes. */
+// Default escapes.
 var defaultEscapes = toExpression(escapes)
 
-/* Surrogate pairs. */
+// Surrogate pairs.
 var surrogatePair = /[\uD800-\uDBFF][\uDC00-\uDFFF]/g
 
-/* Non-ASCII characters. */
+// Non-ASCII characters.
 // eslint-disable-next-line no-control-regex, unicorn/no-hex-escape
 var bmp = /[\x01-\t\x0B\f\x0E-\x1F\x7F\x81\x8D\x8F\x90\x9D\xA0-\uFFFF]/g
 
-/* Encode special characters in `value`. */
+// Encode special characters in `value`.
 function encode(value, options) {
   var settings = options || {}
   var subset = settings.subset
@@ -36,9 +35,7 @@ function encode(value, options) {
   var escapeOnly = settings.escapeOnly
   var omit = settings.omitOptionalSemicolons
 
-  value = value.replace(set, function(char, pos, val) {
-    return one(char, val.charAt(pos + 1), settings)
-  })
+  value = value.replace(set, replace)
 
   if (subset || escapeOnly) {
     return value
@@ -46,7 +43,7 @@ function encode(value, options) {
 
   return value
     .replace(surrogatePair, replaceSurrogatePair)
-    .replace(bmp, replaceBmp)
+    .replace(bmp, replace)
 
   function replaceSurrogatePair(pair, pos, val) {
     return toHexReference(
@@ -59,20 +56,17 @@ function encode(value, options) {
     )
   }
 
-  function replaceBmp(char, pos, val) {
+  function replace(char, pos, val) {
     return one(char, val.charAt(pos + 1), settings)
   }
 }
 
-/* Shortcut to escape special characters in HTML. */
+// Shortcut to escape special characters in HTML.
 function escape(value) {
-  return encode(value, {
-    escapeOnly: true,
-    useNamedReferences: true
-  })
+  return encode(value, {escapeOnly: true, useNamedReferences: true})
 }
 
-/* Encode `char` according to `options`. */
+// Encode `char` according to `options`.
 function one(char, next, options) {
   var shortest = options.useShortestReferences
   var omit = options.omitOptionalSemicolons
@@ -94,7 +88,7 @@ function one(char, next, options) {
   return numeric
 }
 
-/* Transform `code` into an entity. */
+// Transform `code` into an entity.
 function toNamed(name, next, omit, attribute) {
   var value = '&' + name
 
@@ -110,18 +104,18 @@ function toNamed(name, next, omit, attribute) {
   return value + ';'
 }
 
-/* Transform `code` into a hexadecimal character reference. */
+// Transform `code` into a hexadecimal character reference.
 function toHexReference(code, next, omit) {
   var value = '&#x' + code.toString(16).toUpperCase()
   return omit && next && !hexadecimal(next) ? value : value + ';'
 }
 
-/* Create an expression for `characters`. */
+// Create an expression for `characters`.
 function toExpression(characters) {
   return new RegExp('[' + characters.join('') + ']', 'g')
 }
 
-/* Construct the map. */
+// Construct the map.
 function construct() {
   var chars = {}
   var name

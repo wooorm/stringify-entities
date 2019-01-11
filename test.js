@@ -37,9 +37,7 @@ test('stringifyEntities(value[, options])', function(t) {
   )
 
   t.equal(
-    stringify('alpha © bravo ≠ charlie 𝌆 delta', {
-      useShortestReferences: true
-    }),
+    stringify('alpha © bravo ≠ charlie 𝌆 delta', {useShortestReferences: true}),
     'alpha &#xA9; bravo &ne; charlie &#x1D306; delta',
     'Should use shortest entities if `useShortestReferences`'
   )
@@ -51,26 +49,19 @@ test('stringifyEntities(value[, options])', function(t) {
   )
 
   t.equal(
-    stringify('\'"<>&', {
-      subset: ['&']
-    }),
+    stringify('\'"<>&', {subset: ['&']}),
     '\'"<>&#x26;',
     'Encode support a `subset`'
   )
 
   t.equal(
-    stringify('\'"<>&', {
-      subset: ['&'],
-      useNamedReferences: true
-    }),
+    stringify('\'"<>&', {subset: ['&'], useNamedReferences: true}),
     '\'"<>&amp;',
     'Encode support a `subset` with `useNamedReferences`'
   )
 
   t.equal(
-    stringify('&such', {
-      omitOptionalSemicolons: true
-    }),
+    stringify('&such', {omitOptionalSemicolons: true}),
     '&#x26such',
     'Omit semi-colons'
   )
@@ -85,9 +76,7 @@ test('stringifyEntities(value[, options])', function(t) {
   )
 
   t.equal(
-    stringify('&bada55', {
-      omitOptionalSemicolons: true
-    }),
+    stringify('&bada55', {omitOptionalSemicolons: true}),
     '&#x26;bada55',
     'Should not omit semi-colons, when numeric, and the next ' +
       'is hexadecimal'
@@ -126,29 +115,20 @@ test('stringifyEntities(value[, options])', function(t) {
   )
 
   t.equal(
-    stringify('¬it;', {
-      useNamedReferences: true,
-      omitOptionalSemicolons: true
-    }),
+    stringify('¬it;', {useNamedReferences: true, omitOptionalSemicolons: true}),
     '&not;it;',
     'Should not omit semi-colons when conflicting'
   )
 
   t.equal(
-    stringify('&amp', {
-      useNamedReferences: true,
-      omitOptionalSemicolons: true
-    }),
+    stringify('&amp', {useNamedReferences: true, omitOptionalSemicolons: true}),
     '&ampamp',
     'Should omit semi-colons when named, not in an attribute, and ' +
       'the next character is alphanumeric'
   )
 
   t.equal(
-    stringify('&=', {
-      useNamedReferences: true,
-      omitOptionalSemicolons: true
-    }),
+    stringify('&=', {useNamedReferences: true, omitOptionalSemicolons: true}),
     '&amp=',
     'Should omit semi-colons when named, not in an attribute, and ' +
       'the next character is `=`'
