@@ -110,7 +110,7 @@ Create entities which don’t fail in attributes (`boolean?`, default:
 
 [coverage-status]: https://codecov.io/github/wooorm/stringify-entities
 
-[license]: LICENSE
+[license]: license
 
 [author]: http://wooorm.com
 
