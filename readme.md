@@ -1,4 +1,9 @@
-# stringify-entities [![Build Status][build-badge]][build-status] [![Coverage Status][coverage-badge]][coverage-status]
+# stringify-entities
+
+[![Build Status][build-badge]][build-status]
+[![Coverage Status][coverage-badge]][coverage-status]
+[![Downloads][downloads-badge]][downloads]
+[![Size][size-badge]][size]
 
 Encode HTML character references and character entities.
 
@@ -109,6 +114,14 @@ Create entities which don’t fail in attributes (`boolean?`, default:
 [coverage-badge]: https://img.shields.io/codecov/c/github/wooorm/stringify-entities.svg
 
 [coverage-status]: https://codecov.io/github/wooorm/stringify-entities
+
+[downloads-badge]: https://img.shields.io/npm/dm/stringify-entities.svg
+
+[downloads]: https://www.npmjs.com/package/stringify-entities
+
+[size-badge]: https://img.shields.io/bundlephobia/minzip/stringify-entities.svg
+
+[size]: https://bundlephobia.com/result?p=stringify-entities
 
 [license]: license
 
