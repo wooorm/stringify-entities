@@ -3,6 +3,7 @@
 var entities = require('character-entities-html4')
 var legacy = require('character-entities-legacy')
 var hexadecimal = require('is-hexadecimal')
+var decimal = require('is-decimal')
 var alphanumerical = require('is-alphanumerical')
 var dangerous = require('./dangerous.json')
 
@@ -71,14 +72,35 @@ function one(char, next, options) {
   var shortest = options.useShortestReferences
   var omit = options.omitOptionalSemicolons
   var named
+  var code
   var numeric
+  var decimal
 
   if ((shortest || options.useNamedReferences) && own.call(characters, char)) {
     named = toNamed(characters[char], next, omit, options.attribute)
   }
 
   if (shortest || !named) {
-    numeric = toHexReference(char.charCodeAt(0), next, omit)
+    code = char.charCodeAt(0)
+    numeric = toHexReference(code, next, omit)
+
+    // Use the shortest numeric reference when requested.
+    // A simple algorithm would use decimal for all code points under 100, as
+    // those are shorter than hexadecimal:
+    //
+    // * `&#99;` vs `&#x63;` (decimal shorter)
+    // * `&#100;` vs `&#x64;` (equal)
+    //
+    // However, because we take `next` into consideration when `omit` is used,
+    // And it would be possible that decimals are shorter on bigger values as
+    // well if `next` is hexadecimal but not decimal, we instead compare both.
+    if (shortest) {
+      decimal = toDecimalReference(code, next, omit)
+
+      if (decimal.length < numeric.length) {
+        numeric = decimal
+      }
+    }
   }
 
   if (named && (!shortest || named.length < numeric.length)) {
@@ -108,6 +130,12 @@ function toNamed(name, next, omit, attribute) {
 function toHexReference(code, next, omit) {
   var value = '&#x' + code.toString(16).toUpperCase()
   return omit && next && !hexadecimal(next) ? value : value + ';'
+}
+
+// Transform `code` into a decimal character reference.
+function toDecimalReference(code, next, omit) {
+  var value = '&#' + String(code)
+  return omit && next && !decimal(next) ? value : value + ';'
 }
 
 // Create an expression for `characters`.

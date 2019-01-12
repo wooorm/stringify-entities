@@ -37,9 +37,20 @@ test('stringifyEntities(value[, options])', function(t) {
   )
 
   t.equal(
-    stringify('alpha © bravo ≠ charlie 𝌆 delta', {useShortestReferences: true}),
-    'alpha &#xA9; bravo &ne; charlie &#x1D306; delta',
+    stringify('alpha © bravo ≠ charlie 𝌆 delta " echo', {
+      useShortestReferences: true
+    }),
+    'alpha &#xA9; bravo &ne; charlie &#x1D306; delta &#34; echo',
     'Should use shortest entities if `useShortestReferences`'
+  )
+
+  t.equal(
+    stringify('" "0 "a "z µ µ0 µa µz', {
+      useShortestReferences: true,
+      omitOptionalSemicolons: true
+    }),
+    '&#34 &#34;0 &#34a &#34z &#xB5 &#xB5;0 &#181a &#xB5z',
+    'Should pick the shortest numeric reference based on `next` with `omitOptionalSemicolons`'
   )
 
   t.equal(
