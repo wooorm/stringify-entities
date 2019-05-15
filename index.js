@@ -12,6 +12,9 @@ encode.escape = escape
 
 var own = {}.hasOwnProperty
 
+// Characters
+var equalsTo = 61
+
 // List of enforced escapes.
 var escapes = ['"', "'", '<', '>', '&', '`']
 
@@ -52,13 +55,13 @@ function encode(value, options) {
         pair.charCodeAt(1) -
         0xdc00 +
         0x10000,
-      val.charAt(pos + 2),
+      val.charCodeAt(pos + 2),
       omit
     )
   }
 
   function replace(char, pos, val) {
-    return one(char, val.charAt(pos + 1), settings)
+    return one(char, val.charCodeAt(pos + 1), settings)
   }
 }
 
@@ -118,7 +121,7 @@ function toNamed(name, next, omit, attribute) {
     omit &&
     own.call(legacy, name) &&
     dangerous.indexOf(name) === -1 &&
-    (!attribute || (next && next !== '=' && !alphanumerical(next)))
+    (!attribute || (next && next !== equalsTo && !alphanumerical(next)))
   ) {
     return value
   }
