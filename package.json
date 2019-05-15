@@ -68,9 +68,6 @@
     "prettier": true,
     "esnext": false,
     "rules": {
-      "no-var": "off",
-      "unicorn/number-literal-case": "off",
-      "prefer-arrow-callback": "off",
       "guard-for-in": "off"
     },
     "ignores": [
