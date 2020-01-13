@@ -3,7 +3,7 @@
 declare namespace stringifyEntities {
   interface StringifyEntitiesOptions {
     /**
-     * Whether to only escape possibly dangerous characters (`boolean`,default: `false`).
+     * Whether to only escape possibly dangerous characters (`boolean`, default: `false`).
      * Those characters are `"`, `'`, `<`, `>` `&`, and `` ` ``.
      */
     escapeOnly: boolean
