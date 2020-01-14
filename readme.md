@@ -25,15 +25,15 @@ By default, numeric entities are used.
 Pass [`useNamedReferences`][named] to use named entities when possible, or
 [`useShortestReferences`][short] to use them if that results in less bytes.
 
-## Installation
+## Install
 
 [npm][]:
 
-```bash
+```sh
 npm install stringify-entities
 ```
 
-## Usage
+## Use
 
 ```js
 var stringify = require('stringify-entities')
