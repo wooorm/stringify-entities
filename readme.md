@@ -10,13 +10,13 @@ Encode HTML character references and character entities.
 *   [x] Very fast
 *   [x] Just the encoding part
 *   [x] Reliable: ``'`'`` characters are escaped to ensure no scripts
-    run in IE6-8.
-    Additionally, only named entities recognised by HTML4 are encoded, meaning
+    run in Internet Explorer 6 to 8.
+    Additionally, only named entities recognized by HTML4 are encoded, meaning
     the infamous `&apos;` (which people think is a [virus][]) won’t show up
 
 ## Algorithm
 
-By default, all dangerous, non-ASCII, or non-printable ASCII characters are
+By default, all dangerous, non-ASCII, and non-printable ASCII characters are
 encoded.
 A [subset][] of characters can be given to encode just those characters.
 Alternatively, pass [`escapeOnly`][escapeonly] to escape just the dangerous
@@ -75,11 +75,11 @@ Whether to use named entities, where possible, if that results in less bytes
 
 ###### `options.omitOptionalSemicolons`
 
-Whether to omit semi-colons when possible (`boolean?`, default: `false`).
+Whether to omit semicolons when possible (`boolean?`, default: `false`).
 **Note**: This creates parse errors, don’t use this except when building a
 minifier.
 
-Omitting semi-colons is possible for [certain][dangerous] [legacy][] named
+Omitting semicolons is possible for [certain][dangerous] [legacy][] named
 references, and numeric entities, in some cases.
 
 ###### `options.attribute`
