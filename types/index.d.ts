@@ -6,23 +6,23 @@ declare namespace stringifyEntities {
      * Whether to only escape possibly dangerous characters (`boolean`, default: `false`).
      * Those characters are `"`, `'`, `<`, `>` `&`, and `` ` ``.
      */
-    escapeOnly: boolean
+    escapeOnly?: boolean
 
     /**
      * Whether to only escape the given subset of characters (`Array.<string>`).
      */
-    subset: string[]
+    subset?: string[]
 
     /**
      * Whether to use named entities where possible (`boolean?`, default: `false`).
      */
-    useNamedReferences: boolean
+    useNamedReferences?: boolean
 
     /**
      * Whether to use named entities, where possible, if that results in less bytes (`boolean?`, default: `false`).
      * **Note**: `useNamedReferences` can be omitted when using `useShortestReferences`.
      */
-    useShortestReferences: boolean
+    useShortestReferences?: boolean
 
     /**
      * Whether to omit semi-colons when possible (`boolean?`, default: `false`).
@@ -30,13 +30,13 @@ declare namespace stringifyEntities {
      *
      * Omitting semi-colons is possible for certain legacy named references, and numeric entities, in some cases.
      */
-    omitOptionalSemicolons: boolean
+    omitOptionalSemicolons?: boolean
 
     /**
      * Only needed when operating dangerously with `omitOptionalSemicolons: true`.
      * Create entities which don’t fail in attributes (`boolean?`, default: `false`).
      */
-    attribute: boolean
+    attribute?: boolean
   }
 }
 
@@ -45,7 +45,7 @@ declare namespace stringifyEntities {
  */
 declare function stringifyEntities(
   value: string,
-  options?: Partial<stringifyEntities.StringifyEntitiesOptions>
+  options?: stringifyEntities.StringifyEntitiesOptions
 ): string
 
 export = stringifyEntities
