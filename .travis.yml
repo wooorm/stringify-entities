@@ -9,7 +9,7 @@ deploy:
   api_key:
     secure: KVsQfi5Wrgqw8EJis+pn3UkHDSExic4K/I7jt6NFpdGal+MnxFWIh9yWYc3mhPZvaIk5thye5YmlcnFKKBhOmnceQMWvgWaMfVRRe27vdimer9jzfMZski5fMG00IPMFRRcdZrZ9oSne65eZy5g4TwEOWkeW5CTPowjvVaSuzF085cX7eQoIyuEbYsmQ8Gf0K4btR8+31D8aI1IEU1ob7s1FRl4jhsKrTkch/0RIHimvjgf3LLWAGCzR1slO5RacMJAILifcHnxt6adWmJTp8hSyv0fEyhXqTOd87ahlWJ8RHkYeBJQVW05PuMqCTDaObCh8tOgBwj8xoh6uhkZiq19hgsBoZwTlk3depBCJgl015d9sf9Jq77jIoDty7AMJJrrV1RQ0Hko70KyWg1BZDXa6yHux02iwS0eIWDfV7fNt+xCqZRpEKRuujVrdHcYZ/ydfi7U7K5yJnO7+s+Duwk84a40jHa22H8JPdMg0D4RBccC57Cy5M+ZdhZTQyUNvEwp+7svh0j84dg1vh7CMs37oNkXQQw9GMsKdZrNftqF0wttqzycFjgdsvqchURNBNM50h1A0lwMeuM5fHbMnZUCQDVfDeyVLn2LhFLon6IodPeC+ZeUMBx3EBTa3U3fmn5OIaMeUbRbZtBsJ4/14ylv33dqO0YSqr69mTJCUo/g=
   file:
-    - "stringify-entities.js"
-    - "stringify-entities.min.js"
+    - 'stringify-entities.js'
+    - 'stringify-entities.min.js'
   on:
     tags: true

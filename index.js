@@ -49,19 +49,19 @@ function encode(value, options) {
     .replace(surrogatePair, replaceSurrogatePair)
     .replace(bmp, replace)
 
-  function replaceSurrogatePair(pair, pos, val) {
+  function replaceSurrogatePair(pair, pos, slice) {
     return toHexReference(
       (pair.charCodeAt(0) - 0xd800) * 0x400 +
         pair.charCodeAt(1) -
         0xdc00 +
         0x10000,
-      val.charCodeAt(pos + 2),
+      slice.charCodeAt(pos + 2),
       omit
     )
   }
 
-  function replace(char, pos, val) {
-    return one(char, val.charCodeAt(pos + 1), settings)
+  function replace(char, pos, slice) {
+    return one(char, slice.charCodeAt(pos + 1), settings)
   }
 }
 

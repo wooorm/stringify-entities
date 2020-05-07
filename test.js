@@ -3,7 +3,7 @@
 var test = require('tape')
 var stringify = require('.')
 
-test('stringifyEntities.escape(value)', function(t) {
+test('stringifyEntities.escape(value)', function (t) {
   t.equal(
     stringify.escape(
       '<img src=\'x\' onerror="prompt(1)">' +
@@ -21,7 +21,7 @@ test('stringifyEntities.escape(value)', function(t) {
   t.end()
 })
 
-test('stringifyEntities(value[, options])', function(t) {
+test('stringifyEntities(value[, options])', function (t) {
   t.equal(
     stringify('foo\u00A9bar\uD834\uDF06baz\u2603qux'),
     'foo&#xA9;bar&#x1D306;baz&#x2603;qux',
