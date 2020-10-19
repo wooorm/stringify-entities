@@ -9,8 +9,8 @@ Encode HTML character references.
 
 *   [x] Very fast
 *   [x] Just the encoding part
-*   [x] Has either all the options you need for a minifier/prettifier, or it has
-    a tiny size w/ `stringify-entities/light`
+*   [x] Has either all the options you need for a minifier/prettifier, or a tiny
+    size w/ `stringify-entities/light`
 *   [x] Reliable: ``'`'`` characters are escaped to ensure no scripts
     run in Internet Explorer 6 to 8.
     Additionally, only named references recognized by HTML4 are encoded, meaning
@@ -25,9 +25,9 @@ Alternatively, pass [`escapeOnly`][escapeonly] to escape just the dangerous
 characters (`"`, `'`, `<`, `>`, `&`, `` ` ``).
 By default, hexadecimal character references are used.
 Pass [`useNamedReferences`][named] to use named character references when
-possible, or [`useShortestReferences`][short] to use them if that results in
-less bytes.
-There is also a `stringify-entities/light` file exported, which works just like
+possible, or [`useShortestReferences`][short] to use whichever is shortest:
+decimal, hexadecimal, or named.
+There is also a `stringify-entities/light` module, which works just like
 `stringifyEntities` but without the formatting options: it’s much smaller but
 always outputs hexadecimal character references.
 
