@@ -33,7 +33,7 @@ test('stringifyEntities(value[, options])', function (t) {
       useNamedReferences: true
     }),
     'foo&copy;bar&#x1D306;baz&#x2603;qux',
-    'Should use named entities if `useNamedReferences` and possible'
+    'Should use named character references if `useNamedReferences` and possible'
   )
 
   t.equal(
@@ -41,7 +41,7 @@ test('stringifyEntities(value[, options])', function (t) {
       useShortestReferences: true
     }),
     'alpha &#xA9; bravo &ne; charlie &#x1D306; delta &#34; echo',
-    'Should use shortest entities if `useShortestReferences`'
+    'Should use shortest character references if `useShortestReferences`'
   )
 
   t.equal(

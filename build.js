@@ -28,6 +28,6 @@ while (++index < length) {
 }
 
 fs.writeFileSync(
-  path.join('dangerous.json'),
+  path.join('lib', 'constant', 'dangerous.json'),
   JSON.stringify(conflict, null, 2) + '\n'
 )

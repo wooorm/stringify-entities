@@ -24,17 +24,16 @@
     "Titus Wormer <tituswormer@gmail.com> (https://wooorm.com)"
   ],
   "files": [
-    "dangerous.json",
+    "lib/",
     "index.js",
+    "light.js",
     "types/index.d.ts"
   ],
   "types": "types/index.d.ts",
   "dependencies": {
     "character-entities-html4": "^1.0.0",
     "character-entities-legacy": "^1.0.0",
-    "is-alphanumerical": "^1.0.0",
-    "is-decimal": "^1.0.2",
-    "is-hexadecimal": "^1.0.0"
+    "xtend": "^4.0.0"
   },
   "devDependencies": {
     "browserify": "^17.0.0",
