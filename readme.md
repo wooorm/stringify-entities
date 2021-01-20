@@ -1,7 +1,7 @@
 # stringify-entities
 
-[![Build Status][build-badge]][build-status]
-[![Coverage Status][coverage-badge]][coverage-status]
+[![Build Status][build-badge]][build]
+[![Coverage Status][coverage-badge]][coverage]
 [![Downloads][downloads-badge]][downloads]
 [![Size][size-badge]][size]
 
@@ -123,13 +123,13 @@ Create character references which don’t fail in attributes (`boolean?`, defaul
 
 <!-- Definitions -->
 
-[build-badge]: https://img.shields.io/travis/wooorm/stringify-entities.svg
+[build-badge]: https://github.com/wooorm/stringify-entities/workflows/main/badge.svg
 
-[build-status]: https://travis-ci.org/wooorm/stringify-entities
+[build]: https://github.com/wooorm/stringify-entities/actions
 
 [coverage-badge]: https://img.shields.io/codecov/c/github/wooorm/stringify-entities.svg
 
-[coverage-status]: https://codecov.io/github/wooorm/stringify-entities
+[coverage]: https://codecov.io/github/wooorm/stringify-entities
 
 [downloads-badge]: https://img.shields.io/npm/dm/stringify-entities.svg
 
