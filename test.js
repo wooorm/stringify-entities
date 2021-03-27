@@ -1,23 +1,5 @@
 import test from 'tape'
-import {stringifyEntities, stringifyEntitiesLight, escape} from './index.js'
-
-test('escape(value)', function (t) {
-  t.equal(
-    escape(
-      '<img src=\'x\' onerror="prompt(1)">' +
-        '<script>alert(1)</script>' +
-        '<img src="x` `' +
-        '<script>alert(1)</script>"` `>'
-    ),
-    '&lt;img src=&#x27;x&#x27; onerror=&quot;prompt(1)&quot;&gt;' +
-      '&lt;script&gt;alert(1)&lt;/script&gt;' +
-      '&lt;img src=&quot;x&#x60; &#x60;' +
-      '&lt;script&gt;alert(1)&lt;/script&gt;&quot;&#x60; &#x60;&gt;',
-    'should escape for XML/HTML'
-  )
-
-  t.end()
-})
+import {stringifyEntities, stringifyEntitiesLight} from './index.js'
 
 test('stringifyEntities(value[, options])', function (t) {
   t.equal(

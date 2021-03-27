@@ -57,7 +57,7 @@ stringifyEntities('alpha © bravo ≠ charlie 𝌆 delta', {useNamedReferences: 
 ## API
 
 This package exports the following identifiers: `stringifyEntities`,
-`stringifyEntitiesLight`, and `escape`.
+`stringifyEntitiesLight`.
 There is no default export.
 
 ### `stringifyEntities(value[, options])`
