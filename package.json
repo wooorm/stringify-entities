@@ -32,8 +32,7 @@
   "types": "types/index.d.ts",
   "dependencies": {
     "character-entities-html4": "^1.0.0",
-    "character-entities-legacy": "^1.0.0",
-    "xtend": "^4.0.0"
+    "character-entities-legacy": "^1.0.0"
   },
   "devDependencies": {
     "browserify": "^17.0.0",
