@@ -1,6 +1,2 @@
-.nyc_output/
 coverage/
 *.md
-*.json
-stringify-entities.js
-stringify-entities.min.js

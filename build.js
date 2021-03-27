@@ -1,9 +1,10 @@
-'use strict'
+import fs from 'fs'
+import path from 'path'
+import {characterEntitiesLegacy} from 'character-entities-legacy'
+import {characterEntities} from 'character-entities'
 
-var fs = require('fs')
-var path = require('path')
-var legacy = Object.keys(require('character-entities-legacy'))
-var entities = Object.keys(require('character-entities'))
+var legacy = Object.keys(characterEntitiesLegacy)
+var entities = Object.keys(characterEntities)
 
 var conflict = []
 var length = legacy.length
@@ -28,6 +29,6 @@ while (++index < length) {
 }
 
 fs.writeFileSync(
-  path.join('lib', 'constant', 'dangerous.json'),
-  JSON.stringify(conflict, null, 2) + '\n'
+  path.join('lib', 'constant', 'dangerous.js'),
+  'export var dangerous = ' + JSON.stringify(conflict, null, 2) + '\n'
 )

@@ -10,7 +10,7 @@ Encode HTML character references.
 *   [x] Very fast
 *   [x] Just the encoding part
 *   [x] Has either all the options you need for a minifier/prettifier, or a tiny
-    size w/ `stringify-entities/light`
+    size w/ `stringifyEntitiesLight`
 *   [x] Reliable: ``'`'`` characters are escaped to ensure no scripts
     run in Internet Explorer 6 to 8.
     Additionally, only named references recognized by HTML4 are encoded, meaning
@@ -27,11 +27,14 @@ By default, hexadecimal character references are used.
 Pass [`useNamedReferences`][named] to use named character references when
 possible, or [`useShortestReferences`][short] to use whichever is shortest:
 decimal, hexadecimal, or named.
-There is also a `stringify-entities/light` module, which works just like
+There is also a `stringifyEntitiesLight` export, which works just like
 `stringifyEntities` but without the formatting options: it’s much smaller but
 always outputs hexadecimal character references.
 
 ## Install
+
+This package is ESM only: Node 12+ is needed to use it and it must be `import`ed
+instead of `require`d.
 
 [npm][]:
 
@@ -42,16 +45,20 @@ npm install stringify-entities
 ## Use
 
 ```js
-var stringify = require('stringify-entities')
+import {stringifyEntities} from 'stringify-entities'
 
-stringify('alpha © bravo ≠ charlie 𝌆 delta')
+stringifyEntities('alpha © bravo ≠ charlie 𝌆 delta')
 // => 'alpha &#xA9; bravo &#x2260; charlie &#x1D306; delta'
 
-stringify('alpha © bravo ≠ charlie 𝌆 delta', {useNamedReferences: true})
+stringifyEntities('alpha © bravo ≠ charlie 𝌆 delta', {useNamedReferences: true})
 // => 'alpha &copy; bravo &ne; charlie &#x1D306; delta'
 ```
 
 ## API
+
+This package exports the following identifiers: `stringifyEntities`,
+`stringifyEntitiesLight`, and `escape`.
+There is no default export.
 
 ### `stringifyEntities(value[, options])`
 
@@ -74,7 +81,7 @@ Note that only BMP characters are supported here (so no emoji).
 
 ##### Formatting options
 
-If you do not care about these, use `stringify-entities/light`, which always
+If you do not care about these, use `stringifyEntitiesLight`, which always
 outputs hexadecimal character references.
 
 ###### `options.useNamedReferences`
@@ -147,7 +154,7 @@ Create character references which don’t fail in attributes (`boolean?`, defaul
 
 [virus]: https://www.telegraph.co.uk/technology/advice/10516839/Why-do-some-apostrophes-get-replaced-with-andapos.html
 
-[dangerous]: lib/constant/dangerous.json
+[dangerous]: lib/constant/dangerous.js
 
 [legacy]: https://github.com/wooorm/character-entities-legacy
 

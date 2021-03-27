@@ -1,8 +1,5 @@
 .DS_Store
 *.log
-.nyc_output/
 coverage/
 node_modules/
-stringify-entities.js
-stringify-entities.min.js
 yarn.lock
