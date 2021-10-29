@@ -25,5 +25,14 @@ while (++index < characterEntitiesLegacy.length) {
 
 fs.writeFileSync(
   path.join('lib', 'constant', 'dangerous.js'),
-  'export const dangerous = ' + JSON.stringify(conflict, null, 2) + '\n'
+  [
+    '/**',
+    ' * List of legacy (that don’t need a trailing `;`) named references which could,',
+    ' * depending on what follows them, turn into a different meaning',
+    ' *',
+    ' * @type {Array.<string>}',
+    ' */',
+    'export const dangerous = ' + JSON.stringify(conflict, null, 2),
+    ''
+  ].join('\n')
 )

@@ -1,6 +1,6 @@
 /**
- * @typedef {import('./lib/index.js').StringifyEntitiesLightOptions} StringifyEntitiesLightOptions
- * @typedef {import('./lib/index.js').StringifyEntitiesOptions} StringifyEntitiesOptions
+ * @typedef {import('./lib/index.js').LightOptions} LightOptions
+ * @typedef {import('./lib/index.js').Options} Options
  */
 
 export * from './lib/index.js'
