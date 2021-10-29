@@ -3,15 +3,14 @@ import path from 'node:path'
 import {characterEntitiesLegacy} from 'character-entities-legacy'
 import {characterEntities} from 'character-entities'
 
-const legacy = Object.keys(characterEntitiesLegacy)
 const entities = Object.keys(characterEntities)
 
 /** @type {string[]} */
 const conflict = []
 let index = -1
 
-while (++index < legacy.length) {
-  const left = legacy[index]
+while (++index < characterEntitiesLegacy.length) {
+  const left = characterEntitiesLegacy[index]
   let offset = -1
 
   while (++offset < entities.length) {
