@@ -9,19 +9,13 @@ const entities = Object.keys(characterEntities)
 /** @type {string[]} */
 const conflict = []
 let index = -1
-/** @type {number} */
-let offset
-/** @type {string} */
-let left
-/** @type {string} */
-let right
 
 while (++index < legacy.length) {
-  left = legacy[index]
-  offset = -1
+  const left = legacy[index]
+  let offset = -1
 
   while (++offset < entities.length) {
-    right = entities[offset]
+    const right = entities[offset]
 
     if (left !== right && right.slice(0, left.length) === left) {
       conflict.push(left)
