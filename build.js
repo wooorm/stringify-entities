@@ -1,20 +1,20 @@
-import fs from 'fs'
-import path from 'path'
+import fs from 'node:fs'
+import path from 'node:path'
 import {characterEntitiesLegacy} from 'character-entities-legacy'
 import {characterEntities} from 'character-entities'
 
-var legacy = Object.keys(characterEntitiesLegacy)
-var entities = Object.keys(characterEntities)
+const legacy = Object.keys(characterEntitiesLegacy)
+const entities = Object.keys(characterEntities)
 
 /** @type {string[]} */
-var conflict = []
-var index = -1
+const conflict = []
+let index = -1
 /** @type {number} */
-var offset
+let offset
 /** @type {string} */
-var left
+let left
 /** @type {string} */
-var right
+let right
 
 while (++index < legacy.length) {
   left = legacy[index]
@@ -32,5 +32,5 @@ while (++index < legacy.length) {
 
 fs.writeFileSync(
   path.join('lib', 'constant', 'dangerous.js'),
-  'export var dangerous = ' + JSON.stringify(conflict, null, 2) + '\n'
+  'export const dangerous = ' + JSON.stringify(conflict, null, 2) + '\n'
 )
