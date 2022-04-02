@@ -50,17 +50,17 @@ In Node.js (version 12.20+, 14.14+, or 16.0+), install with [npm][]:
 npm install stringify-entities
 ```
 
-In Deno with [Skypack][]:
+In Deno with [`esm.sh`][esmsh]:
 
 ```js
-import {stringifyEntities} from 'https://cdn.skypack.dev/stringify-entities@4?dts'
+import {stringifyEntities} from 'https://esm.sh/stringify-entities@4'
 ```
 
-In browsers with [Skypack][]:
+In browsers with [`esm.sh`][esmsh]:
 
 ```html
 <script type="module">
-  import {stringifyEntities} from 'https://cdn.skypack.dev/stringify-entities@4?min'
+  import {stringifyEntities} from 'https://esm.sh/stringify-entities@4?bundle'
 </script>
 ```
 
@@ -211,7 +211,7 @@ See [How to Contribute to Open Source][contribute].
 
 [npm]: https://docs.npmjs.com/cli/install
 
-[skypack]: https://www.skypack.dev
+[esmsh]: https://esm.sh
 
 [license]: license
 
