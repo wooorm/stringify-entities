@@ -5,7 +5,7 @@ import {characterEntities} from 'character-entities'
 
 const entities = Object.keys(characterEntities)
 
-/** @type {string[]} */
+/** @type {Array<string>} */
 const conflict = []
 let index = -1
 
@@ -30,7 +30,7 @@ fs.writeFileSync(
     ' * List of legacy (that don’t need a trailing `;`) named references which could,',
     ' * depending on what follows them, turn into a different meaning',
     ' *',
-    ' * @type {Array.<string>}',
+    ' * @type {Array<string>}',
     ' */',
     'export const dangerous = ' + JSON.stringify(conflict, null, 2),
     ''

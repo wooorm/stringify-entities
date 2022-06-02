@@ -96,7 +96,7 @@ Those characters are `"`, `&`, `'`, `<`, `>`, and `` ` ``.
 
 ###### `options.subset`
 
-Whether to only escape the given subset of characters (`Array.<string>`).
+Whether to only escape the given subset of characters (`Array<string>`).
 Note that only BMP characters are supported here (so no emoji).
 
 ##### Formatting options
