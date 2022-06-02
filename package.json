@@ -1,6 +1,6 @@
 {
   "name": "stringify-entities",
-  "version": "4.0.2",
+  "version": "4.0.3",
   "description": "Serialize (encode) HTML character references",
   "license": "MIT",
   "keywords": [
