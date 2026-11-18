@@ -127,6 +127,56 @@ test('stringifyEntities(value[, options])', async function (t) {
   )
 
   await t.test(
+    'should not omit semicolons when hexadecimal and the next is `;`',
+    async function () {
+      assert.equal(
+        stringifyEntities('&;', {omitOptionalSemicolons: true}),
+        '&#x26;;'
+      )
+    }
+  )
+
+  await t.test(
+    'should not omit semicolons when decimal and the next is `;`',
+    async function () {
+      assert.equal(
+        stringifyEntities('&;', {
+          useShortestReferences: true,
+          omitOptionalSemicolons: true
+        }),
+        '&#38;;'
+      )
+    }
+  )
+
+  await t.test(
+    'should not omit semicolons when named and the next is `;`',
+    async function () {
+      assert.equal(
+        stringifyEntities('&;', {
+          useNamedReferences: true,
+          omitOptionalSemicolons: true
+        }),
+        '&amp;;'
+      )
+    }
+  )
+
+  await t.test(
+    'should not omit semicolons when named in attribute and the next is `;`',
+    async function () {
+      assert.equal(
+        stringifyEntities('&;', {
+          attribute: true,
+          useNamedReferences: true,
+          omitOptionalSemicolons: true
+        }),
+        '&amp;;'
+      )
+    }
+  )
+
+  await t.test(
     'should omit semicolons (named in attribute)',
     async function () {
       assert.equal(
