@@ -27,19 +27,21 @@ Serialize (encode) HTML character references.
 
 ## What is this?
 
-This is a small and powerful encoder of HTML character references (often called
-entities).
-This one has either all the options you need for a minifier/formatter, or a
-tiny size when using `stringifyEntitiesLight`.
+This is a small and powerful encoder of HTML character references
+(often called entities).
+This one has either all the options you need for a minifier/formatter,
+or a tiny size when using
+[`stringifyEntitiesLight`][api-stringify-entities-light].
 
 ## When should I use this?
 
 You can use this for spec-compliant encoding of character references.
 It’s small and fast enough to do that well.
-You can also use this when making an HTML formatter or minifier, because there
-are different ways to produce pretty or tiny output.
-This package is reliable: ``'`'`` characters are encoded to ensure no scripts
-run in Internet Explorer 6 to 8.
+You can also use this when making an HTML formatter or minifier,
+because there are different ways to produce pretty or tiny output.
+This package is reliable:
+``'`'`` characters are encoded to ensure no scripts run in
+Internet Explorer 6 to 8.
 Additionally, only named references recognized by HTML 4 are encoded,
 meaning the infamous `&apos;`
 (which people think is a [virus][telegraph-apos])
@@ -188,7 +190,16 @@ compatible with Node.js 14.14.
 
 ## Security
 
-This package is safe.
+By default,
+`"`, `&`, `'`, `<`, `>`, and `` ` `` are always encoded,
+so the result is safe to use in HTML text and in quoted attribute values.
+Spaces and other ASCII characters are not encoded,
+so the result is not safe in unquoted attribute values.
+
+When you pass `subset`,
+only those characters are encoded.
+Leaving out characters such as `<` or `&` can open you up to a
+[cross-site scripting (XSS)][wikipedia-xss] attack.
 
 ## Related
 
@@ -261,5 +272,7 @@ See [How to Contribute to Open Source][opensource-guide-contribute].
 [telegraph-apos]: https://www.telegraph.co.uk/technology/advice/10516839/Why-do-some-apostrophes-get-replaced-with-andapos.html
 
 [typescript]: https://www.typescriptlang.org
+
+[wikipedia-xss]: https://en.wikipedia.org/wiki/Cross-site_scripting
 
 [wooorm]: https://wooorm.com
