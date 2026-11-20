@@ -3,4 +3,4 @@
  * @typedef {import('./lib/index.js').Options} Options
  */
 
-export * from './lib/index.js'
+export {stringifyEntitiesLight, stringifyEntities} from './lib/index.js'
