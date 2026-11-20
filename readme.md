@@ -203,8 +203,6 @@ Leaving out characters such as `<` or `&` can open you up to a
 
 ## Related
 
-* [`parse-entities`][github-parse-entities]
-  — parse (decode) HTML character references
 * [`wooorm/character-entities`][github-character-entities]
   — info on character references
 * [`wooorm/character-entities-html4`][github-character-entities-html4]
@@ -213,6 +211,8 @@ Leaving out characters such as `<` or `&` can open you up to a
   — info on legacy character references
 * [`wooorm/character-reference-invalid`][github-character-reference-invalid]
   — info on invalid numeric character references
+* [`wooorm/parse-entities`][github-parse-entities]
+  — parse (decode) HTML character references
 
 ## Contribute
 
