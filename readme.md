@@ -1,9 +1,9 @@
 # stringify-entities
 
-[![Build Status][build-badge]][build]
-[![Coverage Status][coverage-badge]][coverage]
-[![Downloads][downloads-badge]][downloads]
-[![Size][size-badge]][size]
+[![Build][badge-build-image]][badge-build-url]
+[![Coverage][badge-coverage-image]][badge-coverage-url]
+[![Downloads][badge-downloads-image]][badge-downloads-url]
+[![Size][badge-size-image]][badge-size-url]
 
 Serialize (encode) HTML character references.
 
@@ -38,13 +38,15 @@ You can also use this when making an HTML formatter or minifier, because there
 are different ways to produce pretty or tiny output.
 This package is reliable: ``'`'`` characters are encoded to ensure no scripts
 run in Internet Explorer 6 to 8.
-Additionally, only named references recognized by HTML 4 are encoded, meaning
-the infamous `&apos;` (which people think is a [virus][]) won’t show up.
+Additionally, only named references recognized by HTML 4 are encoded,
+meaning the infamous `&apos;`
+(which people think is a [virus][telegraph-apos])
+won’t show up.
 
 ## Install
 
-This package is [ESM only][esm].
-In Node.js (version 14.14+, 16.0+), install with [npm][]:
+This package is [ESM only][github-gist-esm].
+In Node.js (version 14.14+, 16.0+), install with [npm][npmjs-install]:
 
 ```sh
 npm install stringify-entities
@@ -142,12 +144,16 @@ Encoded value (`string`).
 
 By default, all dangerous, non-ASCII, and non-printable ASCII characters are
 encoded.
-A [subset][] of characters can be given to encode just those characters.
-Alternatively, pass [`escapeOnly`][escapeonly] to escape just the dangerous
+A [`subset`][api-options-subset] of characters can be given to encode just
+those characters.
+Alternatively,
+pass [`escapeOnly`][api-options-escape-only] to escape just the dangerous
 characters (`"`, `'`, `<`, `>`, `&`, `` ` ``).
 By default, hexadecimal character references are used.
-Pass [`useNamedReferences`][named] to use named character references when
-possible, or [`useShortestReferences`][short] to use whichever is shortest:
+Pass [`useNamedReferences`][api-options-use-named-references] to use named
+character references when possible,
+or [`useShortestReferences`][api-options-use-shortest-references] to use
+whichever is shortest:
 decimal, hexadecimal, or named.
 There is also a `stringifyEntitiesLight` export, which works just like
 `stringifyEntities` but without the formatting options: it’s much smaller but
@@ -170,64 +176,74 @@ This package is safe.
 
 ## Related
 
-* [`parse-entities`](https://github.com/wooorm/parse-entities)
+* [`parse-entities`][github-parse-entities]
   — parse (decode) HTML character references
-* [`wooorm/character-entities`](https://github.com/wooorm/character-entities)
+* [`wooorm/character-entities`][github-character-entities]
   — info on character references
-* [`wooorm/character-entities-html4`](https://github.com/wooorm/character-entities-html4)
+* [`wooorm/character-entities-html4`][github-character-entities-html4]
   — info on HTML 4 character references
-* [`wooorm/character-entities-legacy`](https://github.com/wooorm/character-entities-legacy)
+* [`wooorm/character-entities-legacy`][github-character-entities-legacy]
   — info on legacy character references
-* [`wooorm/character-reference-invalid`](https://github.com/wooorm/character-reference-invalid)
+* [`wooorm/character-reference-invalid`][github-character-reference-invalid]
   — info on invalid numeric character references
 
 ## Contribute
 
 Yes please!
-See [How to Contribute to Open Source][contribute].
+See [How to Contribute to Open Source][opensource-guide-contribute].
 
 ## License
 
-[MIT][license] © [Titus Wormer][author]
+[MIT][file-license] © [Titus Wormer][wooorm]
 
 <!-- Definitions -->
 
-[author]: https://wooorm.com
+[api-options-escape-only]: #optionsescapeonly
 
-[build]: https://github.com/wooorm/stringify-entities/actions
+[api-options-subset]: #optionssubset
 
-[build-badge]: https://github.com/wooorm/stringify-entities/workflows/main/badge.svg
+[api-options-use-named-references]: #optionsusenamedreferences
 
-[contribute]: https://opensource.guide/how-to-contribute/
+[api-options-use-shortest-references]: #optionsuseshortestreferences
 
-[coverage]: https://codecov.io/github/wooorm/stringify-entities
+[badge-build-image]: https://github.com/wooorm/stringify-entities/workflows/main/badge.svg
 
-[coverage-badge]: https://img.shields.io/codecov/c/github/wooorm/stringify-entities.svg
+[badge-build-url]: https://github.com/wooorm/stringify-entities/actions
 
-[downloads]: https://www.npmjs.com/package/stringify-entities
+[badge-coverage-image]: https://img.shields.io/codecov/c/github/wooorm/stringify-entities.svg
 
-[downloads-badge]: https://img.shields.io/npm/dm/stringify-entities.svg
+[badge-coverage-url]: https://codecov.io/github/wooorm/stringify-entities
 
-[escapeonly]: #optionsescapeonly
+[badge-downloads-image]: https://img.shields.io/npm/dm/stringify-entities.svg
 
-[esm]: https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c
+[badge-downloads-url]: https://www.npmjs.com/package/stringify-entities
+
+[badge-size-image]: https://img.shields.io/bundlejs/size/stringify-entities
+
+[badge-size-url]: https://bundlejs.com/?q=stringify-entities
 
 [esmsh]: https://esm.sh
 
-[license]: license
+[file-license]: license
 
-[named]: #optionsusenamedreferences
+[github-character-entities]: https://github.com/wooorm/character-entities
 
-[npm]: https://docs.npmjs.com/cli/install
+[github-character-entities-html4]: https://github.com/wooorm/character-entities-html4
 
-[short]: #optionsuseshortestreferences
+[github-character-entities-legacy]: https://github.com/wooorm/character-entities-legacy
 
-[size]: https://bundlephobia.com/result?p=stringify-entities
+[github-character-reference-invalid]: https://github.com/wooorm/character-reference-invalid
 
-[size-badge]: https://img.shields.io/bundlephobia/minzip/stringify-entities.svg
+[github-gist-esm]: https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c
 
-[subset]: #optionssubset
+[github-parse-entities]: https://github.com/wooorm/parse-entities
+
+[npmjs-install]: https://docs.npmjs.com/cli/install
+
+[opensource-guide-contribute]: https://opensource.guide/how-to-contribute/
+
+[telegraph-apos]: https://www.telegraph.co.uk/technology/advice/10516839/Why-do-some-apostrophes-get-replaced-with-andapos.html
 
 [typescript]: https://www.typescriptlang.org
 
-[virus]: https://www.telegraph.co.uk/technology/advice/10516839/Why-do-some-apostrophes-get-replaced-with-andapos.html
+[wooorm]: https://wooorm.com
