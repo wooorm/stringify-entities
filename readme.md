@@ -9,19 +9,19 @@ Serialize (encode) HTML character references.
 
 ## Contents
 
-*   [What is this?](#what-is-this)
-*   [When should I use this?](#when-should-i-use-this)
-*   [Install](#install)
-*   [Use](#use)
-*   [API](#api)
-    *   [`stringifyEntities(value[, options])`](#stringifyentitiesvalue-options)
-*   [Algorithm](#algorithm)
-*   [Types](#types)
-*   [Compatibility](#compatibility)
-*   [Security](#security)
-*   [Related](#related)
-*   [Contribute](#contribute)
-*   [License](#license)
+* [What is this?](#what-is-this)
+* [When should I use this?](#when-should-i-use-this)
+* [Install](#install)
+* [Use](#use)
+* [API](#api)
+  * [`stringifyEntities(value[, options])`](#stringifyentitiesvalue-options)
+* [Algorithm](#algorithm)
+* [Types](#types)
+* [Compatibility](#compatibility)
+* [Security](#security)
+* [Related](#related)
+* [Contribute](#contribute)
+* [License](#license)
 
 ## What is this?
 
@@ -170,16 +170,16 @@ This package is safe.
 
 ## Related
 
-*   [`parse-entities`](https://github.com/wooorm/parse-entities)
-    — parse (decode) HTML character references
-*   [`wooorm/character-entities`](https://github.com/wooorm/character-entities)
-    — info on character references
-*   [`wooorm/character-entities-html4`](https://github.com/wooorm/character-entities-html4)
-    — info on HTML 4 character references
-*   [`wooorm/character-entities-legacy`](https://github.com/wooorm/character-entities-legacy)
-    — info on legacy character references
-*   [`wooorm/character-reference-invalid`](https://github.com/wooorm/character-reference-invalid)
-    — info on invalid numeric character references
+* [`parse-entities`](https://github.com/wooorm/parse-entities)
+  — parse (decode) HTML character references
+* [`wooorm/character-entities`](https://github.com/wooorm/character-entities)
+  — info on character references
+* [`wooorm/character-entities-html4`](https://github.com/wooorm/character-entities-html4)
+  — info on HTML 4 character references
+* [`wooorm/character-entities-legacy`](https://github.com/wooorm/character-entities-legacy)
+  — info on legacy character references
+* [`wooorm/character-reference-invalid`](https://github.com/wooorm/character-reference-invalid)
+  — info on invalid numeric character references
 
 ## Contribute
 
@@ -192,42 +192,42 @@ See [How to Contribute to Open Source][contribute].
 
 <!-- Definitions -->
 
-[build-badge]: https://github.com/wooorm/stringify-entities/workflows/main/badge.svg
+[author]: https://wooorm.com
 
 [build]: https://github.com/wooorm/stringify-entities/actions
 
-[coverage-badge]: https://img.shields.io/codecov/c/github/wooorm/stringify-entities.svg
+[build-badge]: https://github.com/wooorm/stringify-entities/workflows/main/badge.svg
+
+[contribute]: https://opensource.guide/how-to-contribute/
 
 [coverage]: https://codecov.io/github/wooorm/stringify-entities
 
-[downloads-badge]: https://img.shields.io/npm/dm/stringify-entities.svg
+[coverage-badge]: https://img.shields.io/codecov/c/github/wooorm/stringify-entities.svg
 
 [downloads]: https://www.npmjs.com/package/stringify-entities
 
-[size-badge]: https://img.shields.io/bundlephobia/minzip/stringify-entities.svg
+[downloads-badge]: https://img.shields.io/npm/dm/stringify-entities.svg
 
-[size]: https://bundlephobia.com/result?p=stringify-entities
+[escapeonly]: #optionsescapeonly
 
-[npm]: https://docs.npmjs.com/cli/install
+[esm]: https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c
 
 [esmsh]: https://esm.sh
 
 [license]: license
 
-[author]: https://wooorm.com
+[named]: #optionsusenamedreferences
 
-[esm]: https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c
+[npm]: https://docs.npmjs.com/cli/install
 
-[typescript]: https://www.typescriptlang.org
+[short]: #optionsuseshortestreferences
 
-[contribute]: https://opensource.guide/how-to-contribute/
+[size]: https://bundlephobia.com/result?p=stringify-entities
 
-[virus]: https://www.telegraph.co.uk/technology/advice/10516839/Why-do-some-apostrophes-get-replaced-with-andapos.html
+[size-badge]: https://img.shields.io/bundlephobia/minzip/stringify-entities.svg
 
 [subset]: #optionssubset
 
-[escapeonly]: #optionsescapeonly
+[typescript]: https://www.typescriptlang.org
 
-[named]: #optionsusenamedreferences
-
-[short]: #optionsuseshortestreferences
+[virus]: https://www.telegraph.co.uk/technology/advice/10516839/Why-do-some-apostrophes-get-replaced-with-andapos.html
