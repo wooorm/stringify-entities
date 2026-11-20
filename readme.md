@@ -14,9 +14,11 @@ Serialize (encode) HTML character references.
 * [Install](#install)
 * [Use](#use)
 * [API](#api)
+  * [`LightOptions`](#lightoptions)
+  * [`Options`](#options)
+  * [`stringifyEntitiesLight(value[, options])`](#stringifyentitieslightvalue-options)
   * [`stringifyEntities(value[, options])`](#stringifyentitiesvalue-options)
 * [Algorithm](#algorithm)
-* [Types](#types)
 * [Compatibility](#compatibility)
 * [Security](#security)
 * [Related](#related)
@@ -75,89 +77,104 @@ stringifyEntities('alpha © bravo ≠ charlie 𝌆 delta', {useNamedReferences: 
 
 ## API
 
-This package exports the identifiers `stringifyEntities` and
-`stringifyEntitiesLight`.
+This package exports the identifiers
+[`stringifyEntities`][api-stringify-entities] and
+[`stringifyEntitiesLight`][api-stringify-entities-light].
 There is no default export.
+It exports the additional [TypeScript][] types
+[`LightOptions`][api-light-options] and
+[`Options`][api-options].
+
+### `LightOptions`
+
+Configuration for [`stringifyEntitiesLight`][api-stringify-entities-light]
+(TypeScript type).
+
+###### Fields
+
+* `escapeOnly` (`boolean`, default: `false`)
+  — whether to only escape possibly dangerous characters;
+  those characters are `"`, `&`, `'`, `<`, `>`, and `` ` ``
+* `subset` (`ReadonlyArray<string>`, optional)
+  — whether to only escape the given subset of characters;
+  only BMP characters are supported here (so no emoji)
+
+### `Options`
+
+Configuration for [`stringifyEntities`][api-stringify-entities]
+(TypeScript type).
+
+Includes the fields of [`LightOptions`][api-light-options].
+If you do not care about the following fields,
+use [`stringifyEntitiesLight`][api-stringify-entities-light].
+
+###### Fields
+
+* `attribute` (`boolean`, default: `false`)
+  — create character references which don’t fail in attributes;
+  only applies when operating dangerously with
+  `omitOptionalSemicolons: true`
+* `omitOptionalSemicolons` (`boolean`, default: `false`)
+  — whether to omit semicolons when possible;
+  this creates what HTML calls “parse errors” but is otherwise still valid
+  HTML,
+  so don’t use this except when building a minifier;
+  omitting semicolons is possible for certain named and numeric references in
+  some cases
+* `useNamedReferences` (`boolean`, default: `false`)
+  — prefer named character references (`&amp;`) where possible
+* `useShortestReferences` (`boolean`, default: `false`)
+  — prefer the shortest possible reference,
+  if that results in less bytes;
+  `useNamedReferences` can be omitted when using `useShortestReferences`
+
+### `stringifyEntitiesLight(value[, options])`
+
+Encode special characters in `value` as hexadecimal character references.
+
+###### Parameters
+
+* `value` (`string`, required)
+  — value to encode
+* `options` ([`LightOptions`][api-light-options], optional)
+  — configuration
+
+###### Returns
+
+Encoded value (`string`).
 
 ### `stringifyEntities(value[, options])`
 
 Encode special characters in `value`.
 
-##### Core options
+###### Parameters
 
-###### `options.escapeOnly`
+* `value` (`string`, required)
+  — value to encode
+* `options` ([`Options`][api-options], optional)
+  — configuration
 
-Whether to only escape possibly dangerous characters (`boolean`, default:
-`false`).
-Those characters are `"`, `&`, `'`, `<`, `>`, and `` ` ``.
-
-###### `options.subset`
-
-Whether to only escape the given subset of characters (`Array<string>`).
-Note that only BMP characters are supported here (so no emoji).
-
-##### Formatting options
-
-If you do not care about the following options, use `stringifyEntitiesLight`,
-which always outputs hexadecimal character references.
-
-###### `options.useNamedReferences`
-
-Prefer named character references (`&amp;`) where possible (`boolean?`, default:
-`false`).
-
-###### `options.useShortestReferences`
-
-Prefer the shortest possible reference, if that results in less bytes
-(`boolean?`, default: `false`).
-
-> ⚠️ **Note**: `useNamedReferences` can be omitted when using
-> `useShortestReferences`.
-
-###### `options.omitOptionalSemicolons`
-
-Whether to omit semicolons when possible (`boolean?`, default: `false`).
-
-> ⚠️ **Note**: This creates what HTML calls “parse errors” but is otherwise
-> still valid HTML — don’t use this except when building a minifier.
-> Omitting semicolons is possible for certain named and numeric references in
-> some cases.
-
-###### `options.attribute`
-
-Create character references which don’t fail in attributes (`boolean?`, default:
-`false`).
-
-> ⚠️ **Note**: `attribute` only applies when operating dangerously with
-> `omitOptionalSemicolons: true`.
-
-#### Returns
+###### Returns
 
 Encoded value (`string`).
 
 ## Algorithm
 
-By default, all dangerous, non-ASCII, and non-printable ASCII characters are
-encoded.
-A [`subset`][api-options-subset] of characters can be given to encode just
-those characters.
+By default,
+all dangerous, non-ASCII, and non-printable ASCII characters are encoded.
+A `subset` of characters can be given to encode just those characters.
 Alternatively,
-pass [`escapeOnly`][api-options-escape-only] to escape just the dangerous
-characters (`"`, `'`, `<`, `>`, `&`, `` ` ``).
+pass `escapeOnly` to escape just the dangerous characters
+(`"`, `'`, `<`, `>`, `&`, `` ` ``).
 By default, hexadecimal character references are used.
-Pass [`useNamedReferences`][api-options-use-named-references] to use named
-character references when possible,
-or [`useShortestReferences`][api-options-use-shortest-references] to use
-whichever is shortest:
+Pass `useNamedReferences` to use named character references when possible,
+or `useShortestReferences` to use whichever is shortest:
 decimal, hexadecimal, or named.
-There is also a `stringifyEntitiesLight` export, which works just like
-`stringifyEntities` but without the formatting options: it’s much smaller but
-always outputs hexadecimal character references.
 
-## Types
-
-This package is fully typed with [TypeScript][].
-It exports the additional types `LightOptions` and `Options`.
+There is also [`stringifyEntitiesLight`][api-stringify-entities-light],
+which works just like [`stringifyEntities`][api-stringify-entities]
+but without the formatting options:
+it’s much smaller but always outputs hexadecimal character references.
 
 ## Compatibility
 
@@ -197,13 +214,13 @@ See [How to Contribute to Open Source][opensource-guide-contribute].
 
 <!-- Definitions -->
 
-[api-options-escape-only]: #optionsescapeonly
+[api-light-options]: #lightoptions
 
-[api-options-subset]: #optionssubset
+[api-options]: #options
 
-[api-options-use-named-references]: #optionsusenamedreferences
+[api-stringify-entities]: #stringifyentitiesvalue-options
 
-[api-options-use-shortest-references]: #optionsuseshortestreferences
+[api-stringify-entities-light]: #stringifyentitieslightvalue-options
 
 [badge-build-image]: https://github.com/wooorm/stringify-entities/workflows/main/badge.svg
 
