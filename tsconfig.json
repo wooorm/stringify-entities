@@ -6,7 +6,6 @@
     "declarationMap": true,
     "emitDeclarationOnly": true,
     "exactOptionalPropertyTypes": true,
-    "jsx": "preserve",
     "lib": ["es2022"],
     "module": "node16",
     "strict": true,
