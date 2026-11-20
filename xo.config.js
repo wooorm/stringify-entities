@@ -19,6 +19,7 @@ const xoConfig = [
       'regexp/sort-character-class-elements': 'off',
       'regexp/use-ignore-case': 'off',
       'require-unicode-regexp': 'off',
+      'unicorn/no-array-sort': 'off',
       'unicorn/no-break-in-nested-loop': 'off',
       // Wrong for replacer functions.
       'unicorn/no-unsafe-string-replacement': 'off',
@@ -28,6 +29,7 @@ const xoConfig = [
       'unicorn/prefer-string-raw': 'off',
       'unicorn/prefer-string-replace-all': 'off',
       'unicorn/prefer-unicode-code-point-escapes': 'off',
+      'unicorn/require-array-sort-compare': 'off',
       'unicorn/single-line-block-comment-style': 'off'
     },
     space: true
