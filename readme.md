@@ -52,12 +52,6 @@ In Node.js (version 14.14+, 16.0+), install with [npm][npmjs-install]:
 npm install stringify-entities
 ```
 
-In Deno with [`esm.sh`][esmsh]:
-
-```js
-import {stringifyEntities} from 'https://esm.sh/stringify-entities@4'
-```
-
 In browsers with [`esm.sh`][esmsh]:
 
 ```html
