@@ -126,6 +126,16 @@ test('stringifyEntities(value[, options])', async function (t) {
     }
   )
 
+  await t.test('should not omit semicolons before `;`', async function () {
+    assert.equal(
+      stringifyEntities('&;', {
+        useShortestReferences: true,
+        omitOptionalSemicolons: true
+      }),
+      '&#38;;'
+    )
+  })
+
   await t.test(
     'should omit semicolons (named in attribute)',
     async function () {
